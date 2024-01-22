@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
   import { getImageUrl, getServers } from "$lib/db/pocketbase";
   import { serverSelected, currentUser } from "$lib/stores";
 
@@ -15,6 +16,7 @@
       <button
         on:click={() => {
           serverSelected.set(server.expand?.server);
+          goto("/")
         }}
       >
         <img
