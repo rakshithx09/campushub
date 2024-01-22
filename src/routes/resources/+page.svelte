@@ -1,5 +1,16 @@
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem neque vel exercitationem alias, omnis non. Molestiae, exercitationem cupiditate repudiandae optio recusandae in ex commodi quaerat! Quasi consequuntur culpa reprehenderit iure?</p>
-<p>Doloribus debitis nisi perspiciatis sequi ipsum assumenda odit. Repellendus officiis provident hic, minus nam atque cumque libero. In, corrupti id, ut animi dolor rerum, deserunt quo consequuntur nemo nihil voluptate.</p>
-<p>Quidem impedit alias eveniet neque laudantium possimus quo nobis voluptate illo nihil, consectetur libero. Fugiat deleniti facere quisquam totam distinctio excepturi dignissimos harum, quia molestias. Fugiat ut illo officiis eaque.</p>
-<p>Harum tenetur molestias maiores minus, consequatur deserunt voluptatum praesentium omnis corrupti impedit ad voluptate debitis perspiciatis et quo nostrum accusamus magnam sapiente! Natus aspernatur, vitae debitis esse sed tempore corporis?</p>
-<p>Eligendi libero reiciendis dolor perspiciatis explicabo rerum sunt delectus obcaecati quasi dolorum. Beatae rerum pariatur ratione optio, debitis ullam in maxime ex, soluta fugit quas maiores voluptatem officia illum quia!</p>
+<script lang="ts">
+    import {serverSelected } from "$lib/stores";
+    import { onMount } from "svelte";
+    onMount(()=>{
+        serverSelected.set(null);
+    })
+
+</script>
+
+<main>
+     <!-- TODO: resorces page goes here -->
+</main>
+
+<style>
+    /* if any custom css needed insert here */
+</style>

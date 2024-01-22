@@ -9,6 +9,6 @@
 
   </svelte:fragment>
   <svelte:fragment slot="trail">
-    
+    <a href="/resources">resources</a>
   </svelte:fragment>
 </AppBar>
