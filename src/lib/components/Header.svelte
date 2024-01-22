@@ -6,6 +6,9 @@
 <AppBar>
   <svelte:fragment slot="lead">
     <img src={nitteLogo} alt="NMAMIT NITTE" />
+
   </svelte:fragment>
-  <svelte:fragment slot="trail"></svelte:fragment>
+  <svelte:fragment slot="trail">
+    
+  </svelte:fragment>
 </AppBar>

@@ -1,4 +1,4 @@
-import type { Channel } from '$lib/types';
+import type { Channel, MessageWithUser } from '$lib/types';
 import PocketBase from 'pocketbase';
 
 export const pb = new PocketBase('http://127.0.0.1:8090');
@@ -29,11 +29,11 @@ export async function getChannels(serverId: string) {
     })) as Channel[];
 }
 
-export async function getMessages(channelId: string) {
+export async function getMessages(channelId: string): Promise<MessageWithUser[]> {
     const response = await pb.collection("messages").getList(1, 50, {
         filter: `channel ="${channelId}"`,
         sort: "created",
         expand: "user",
     });
-    return response.items;
-}
+    return response.items as MessageWithUser[]
+} 
