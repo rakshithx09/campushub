@@ -4,12 +4,9 @@
   import type { MessageWithUser } from "$lib/types";
   import { Avatar } from "@skeletonlabs/skeleton";
   import { onMount, onDestroy } from "svelte";
-  import Header from "./Header.svelte";
 
   let newMessage: string;
   let messages: MessageWithUser[] = [];
-  let elemChat: HTMLElement;
-
   $: channelId = $channelSelected!.id;
 
   let unsubscribe: () => void;
@@ -110,7 +107,7 @@
       {/each}
     </div>
   {:else}
-    <p>No message you be the first to start conversation</p>
+    <p>No message let you be the first to start conversation</p>
   {/if}
 
   <div

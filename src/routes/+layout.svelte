@@ -30,15 +30,15 @@
 
     <svelte:fragment slot="sidebarLeft">
       <div class="flex h-full overflow-hidden">
-        <ServerSidebar />
+        <ServerSidebar user={$currentUser}/>
 
         {#if $serverSelected}
-          <ChannelSiderBar />
+          <ChannelSiderBar server = {$serverSelected}/>
         {/if}
       </div>
     </svelte:fragment>
 
-    <!-- (sidebarRight) -->
+
     <svelte:fragment slot="pageHeader">Page Header</svelte:fragment>
     <!-- Router Slot -->
 
