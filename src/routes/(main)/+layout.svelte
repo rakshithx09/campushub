@@ -1,6 +1,6 @@
 <script lang="ts">
   import { AppShell } from "@skeletonlabs/skeleton";
-  import "../app.postcss";
+  import "../../app.postcss";
 
   // Floating UI for Popups
   import {
