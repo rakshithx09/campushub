@@ -24,16 +24,18 @@ export function getImageUrl(record: {
 }
 
 export async function getChannels(serverId: string) {
-    return (await pb.collection("channels").getFullList({
+    return (await pb.collection<Channel>("channels").getFullList({
         filter: `server = "${serverId}"`,
-    })) as Channel[];
+    }));
 }
 
-export async function getMessages(channelId: string): Promise<MessageWithUser[]> {
-    const response = await pb.collection("messages").getList(1, 50, {
+export async function getMessages(channelId: string) {
+    const response = await pb.collection<MessageWithUser>("messages").getList(1, 50, {
         filter: `channel ="${channelId}"`,
         sort: "created",
         expand: "user",
     });
-    return response.items as MessageWithUser[]
+    return response.items
 } 
+
+
