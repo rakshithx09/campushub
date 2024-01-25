@@ -16,7 +16,7 @@ export type Channel = ChannelsRecord & BaseSystemFields
 export type Message = MessagesRecord & BaseSystemFields
 
 type _expandUser = {
-    user: User;
+    user: BaseUser;
 };
 
 export type MessageWithUser = MessagesRecord & Required<BaseSystemFields<_expandUser>>
