@@ -1,4 +1,4 @@
-import type { Channel, MessageWithUser } from '$lib/types';
+import type { Channel, MessageWithUser, Server } from '$lib/types';
 import PocketBase from 'pocketbase';
 
 export const pb = new PocketBase('http://127.0.0.1:8090');
@@ -14,9 +14,14 @@ export async function getServers(userId: string) {
     });
 }
 
+export async function getAllServers() {
+    return await pb.collection<Server>("servers").getFullList();
+}
+
 export function getImageUrl(record: {
     [key: string]: any;
-}, filename: string): string {
+}, filename?: string): string {
+    if (!filename) return ""
     return pb.files.getUrl(
         record,
         filename,

@@ -1,16 +1,32 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import { pb } from "$lib/db/pocketbase";
+  import { admin } from "$lib/stores/admin";
 
   let email: string;
   let password: string;
+  let message: string | null;
 
   async function login() {
-    await pb.collection("users").authWithPassword(email, password);
+    try {
+      await pb.admins.authWithPassword(email, password);
+      goto("/admin");
+    } catch (err) {
+      message = "invalid credentials";
+    }
+  }
+
+  if ($admin) {
+    goto("/admin");
   }
 </script>
 
 <section class="mt-20 h-full w-full">
   <form on:submit|preventDefault={login} class="space-y-4">
+    {#if message}
+      <div class="bg-red-800/70 p-4 w-full text-center">{message}</div>
+    {/if}
+
     <label class="label">
       <span>Email</span>
       <input
