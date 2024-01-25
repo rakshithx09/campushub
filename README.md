@@ -54,10 +54,8 @@ Feb 6 : code submission and video demo ( 5 minutes of video )
 
 ---
 
-# 🛫 Tech stack (rakshith fill this man):
 
-> **Example questions to answer:**
-What are we building?  How does it work? How do we know that it works? What are we measuring? When will it be ready? 
+
 
 **Then, answer these questions:**
 > 
@@ -97,3 +95,5 @@ What are we building?  How does it work? How do we know that it works? What are 
 - [ ]  AI  api fetch ( additional feature )
 - [ ]  courses hardcoded
 - [ ]  grades checking ( additional feature)
+
+# Embed the ai bot to all pages @rakshith & @karthik
