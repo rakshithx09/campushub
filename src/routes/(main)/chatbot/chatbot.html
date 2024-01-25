@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat-bot</title>
+    <style>
+      body {
+        background-color: #eeeef1;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script>
+      window.botpressWebChat.init({
+        composerPlaceholder: "Chat with Smart Buddy",
+        botConversationDescription: "hey buddy!!! how can i help you?",
+        botId: "4e9a144f-209e-434b-9702-a73b6831ab0f",
+        hostUrl: "https://cdn.botpress.cloud/webchat/v1",
+        messagingUrl: "https://messaging.botpress.cloud",
+        clientId: "4e9a144f-209e-434b-9702-a73b6831ab0f",
+        webhookId: "7fc8089d-a938-4e9b-a7d3-ddfc36a00ef1",
+        lazySocket: true,
+        themeName: "prism",
+        botName: "Smart Buddy",
+        avatarUrl:
+          "https://w7.pngwing.com/pngs/224/462/png-transparent-infinity-symbol-logo-infinity-miscellaneous-text-trademark-thumbnail.png",
+        stylesheet:
+          "https://webchat-styler-css.botpress.app/prod/418bbb54-ebf7-4855-a586-bc3676d793b9/v67040/style.css",
+        frontendVersion: "v1",
+        enableConversationDeletion: true,
+        showPoweredBy: true,
+        theme: "prism",
+        themeColor: "#2563eb",
+      });
+    </script>
+  </body>
+</html>
