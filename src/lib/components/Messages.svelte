@@ -70,9 +70,9 @@
     newMessage = "";
   }
 
-  function scrollChatBottom(dumb: any) {
+  function scrollChatBottom(node:HTMLElement,dumb: any) {
     const update = () => {
-      const item = document.querySelector(".message-box");
+      const item = node.lastElementChild;
       if (item) item.scrollIntoView({ block: "center" });
     };
     update();
@@ -80,7 +80,7 @@
   }
 </script>
 
-<section use:scrollChatBottom>
+<section use:scrollChatBottom={messages}>
   {#if messages}
     <div class="messages">
       {#each formatMessage(messages) as message (message.id)}
