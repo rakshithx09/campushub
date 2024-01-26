@@ -4,6 +4,7 @@
   import type { BaseUser, MessageWithUser } from "$lib/types";
   import { pretiffyDateTime } from "$lib/utils";
   import { onMount, onDestroy } from "svelte";
+  import MessageBubble from "./MessageBubble.svelte";
 
   let newMessage: string;
   let messages: MessageWithUser[] = [];
@@ -84,7 +85,7 @@
   {#if messages}
     <div class="messages">
       {#each formatMessage(messages) as message (message.id)}
-        <div
+        <!-- <div
           class={`message  ${
             message.user.id == $currentUser?.id ? "reverse" : ""
           }`}
@@ -97,7 +98,8 @@
             <p>{message.content}</p>
           </div>
           <img src={message.avatar} alt="" class="avatar" />
-        </div>
+        </div> -->
+        <MessageBubble content={message.content} src={message.avatar} username={message.user.username} {message} {currentUser}/>
       {/each}
     </div>
   {:else}

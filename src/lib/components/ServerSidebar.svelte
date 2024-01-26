@@ -9,14 +9,17 @@
   $: servers = getServers(user.id);
 </script>
 
-<section>
+<section class="p-10">
   {#await servers}
     <span>...Loading</span>
   {:then serverResponse}
+  
     {#each serverResponse as server (server.id)}
       <button
+      class={ ` ${$serverSelected?.id == server.expand?.server.id ? "serverSelected" : ""}`}
         on:click={() => {
           serverSelected.set(server.expand?.server);
+          console.log(server)
           goto("/");
         }}
       >
@@ -36,16 +39,19 @@
   section {
     background-color: var(--bg-secondary);
     border-right: 2px solid var(--border);
+    width: 6rem;
     height: 100%;
-    padding: 0.25rem .5rem;
+    padding: 1rem .5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
   }
-
+  button{
+    padding: 0.2rem 0.4rem;
+  }
   img {
-    width: 60px;
+    width: 55px;
     border-radius: 100%;
     aspect-ratio: 1;
     cursor: pointer;
@@ -53,5 +59,8 @@
 
   .selected{
     border:2px solid var(--primary);
+  }
+  .serverSelected{
+    border-left:2px solid var(--primary);
   }
 </style>
