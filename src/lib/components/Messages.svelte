@@ -4,10 +4,12 @@
   import type { BaseUser, MessageWithUser } from "$lib/types";
   import { pretiffyDateTime } from "$lib/utils";
   import { onMount, onDestroy } from "svelte";
+  import MessageBubble from "./MessageBubble.svelte";
 
   let newMessage: string;
   let messages: MessageWithUser[] = [];
   $: channelId = $channelSelected!.id;
+  $: user = $currentUser!;
 
   let unsubscribe: () => void;
 
@@ -21,7 +23,7 @@
           message.expand.user.avatar ?? "",
           { thumb: "50x50" },
         ),
-        content: message.content,
+        content: message.content!,
         createdAt: pretiffyDateTime(message.created),
       };
     });
@@ -63,14 +65,14 @@
     if (!newMessage) return;
     const data = {
       content: newMessage,
-      user: $currentUser!.id,
+      user: user.id,
       channel: channelId,
     };
     await pb.collection("messages").create(data);
     newMessage = "";
   }
 
-  function scrollChatBottom(node:HTMLElement,dumb: any) {
+  function scrollChatBottom(node: HTMLElement, dumb: any) {
     const update = () => {
       const item = node.lastElementChild;
       if (item) item.scrollIntoView({ block: "center" });
@@ -84,7 +86,7 @@
   {#if messages}
     <div class="messages" use:scrollChatBottom={messages}>
       {#each formatMessage(messages) as message (message.id)}
-        <div
+        <!-- <div
           class={`message  ${
             message.user.id == $currentUser?.id ? "reverse" : ""
           }`}
@@ -97,7 +99,8 @@
             <p>{message.content}</p>
           </div>
           <img src={message.avatar} alt="" class="avatar" />
-        </div>
+        </div> -->
+        <MessageBubble {message} currentUser={user} />
       {/each}
     </div>
   {:else}
