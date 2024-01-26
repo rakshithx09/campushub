@@ -33,7 +33,7 @@
   <div class="chat-bubble">{message.content}</div>
 </div>
 
-<style lang="">
+<style>
   /* .avatar {
     object-fit: cover;
     object-position: center;

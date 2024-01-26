@@ -129,23 +129,23 @@
     justify-content: space-between;
   }
 
-  .messages {
+  /* .messages {
     padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-  }
+  } */
 
-  .avatar {
+  /* .avatar {
     object-fit: cover;
     object-position: center;
     max-width: 60px;
     height: 60px;
     aspect-ratio: 1;
     border-radius: 100%;
-  }
+  } */
 
-  .message {
+  /* .message {
     display: flex;
     background-color: var(--bg-accent);
     flex-direction: row;
@@ -155,28 +155,28 @@
     width: 75%;
     align-self: self-end;
     border-radius: var(--radius);
-  }
+  } */
 
-  .reverse {
+  /* .reverse {
     justify-content: flex-start;
     flex-direction: row-reverse;
     align-self: self-start;
-  }
+  } */
 
-  .inner-message {
+  /* .inner-message {
     flex-grow: 1;
-  }
+  } */
 
   p {
     padding: 0;
   }
 
-  .message-head {
+  /* .message-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-  }
+  } */
 
   .message-box {
     margin-top: auto;
