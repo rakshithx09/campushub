@@ -51,3 +51,15 @@ export async function getAllViewableServers(userId: string) {
     }
     );
 }
+
+
+export async function createChannel(name:string,server:Server){
+    await pb.collection('channels').create({
+        name:name,
+        server:server.id
+    });
+}
+
+export async function deleteChannel(channelId:string){
+    await pb.collection('channels').delete(channelId);
+}
