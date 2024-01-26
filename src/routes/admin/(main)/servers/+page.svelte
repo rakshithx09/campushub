@@ -2,12 +2,12 @@
   import { getAllServers, getImageUrl } from "$lib/db/pocketbase";
 </script>
 
-<section class="flex flex-nowrap gap-4 p-4">
+<section>
   {#await getAllServers()}
     <span>...loading</span>
   {:then servers}
     {#each servers as server (server.id)}
-      <div class="card w-48 p-2">
+      <div class="card">
         <img
           src={getImageUrl(server, server.image)}
           alt={server.name}
@@ -20,3 +20,22 @@
     <span>{err}</span>
   {/await}
 </section>
+
+
+<style>
+  section{
+    display: flex;
+    flex-wrap: nowrap;
+    gap:1rem;
+    padding: 1rem;
+  }
+
+  .card{
+    width:12rem;
+  }
+
+  img{
+    width:100%;
+    aspect-ratio: 16/9;
+  }
+</style>

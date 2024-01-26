@@ -1,4 +1,7 @@
-import type { AuthSystemFields, UsersRecord,StudentsRecord,LecturersRecord,ServersRecord,BaseSystemFields,ChannelsRecord,MessagesRecord} from "$lib/types/pb"
+import type { AuthSystemFields, UsersRecord,StudentsRecord,LecturersRecord,ServersRecord,BaseSystemFields,ChannelsRecord,MessagesRecord, MembersRecord} from "$lib/types/pb"
+
+
+// npx pocketbase-typegen --db ./pocketbase/pb_data/data.db --out pocketbase-types.ts
 
 export type BaseUser = AuthSystemFields & UsersRecord
 
@@ -20,3 +23,5 @@ type _expandUser = {
 };
 
 export type MessageWithUser = MessagesRecord & Required<BaseSystemFields<_expandUser>>
+
+export type MemberWithServer = MembersRecord & Required<BaseSystemFields<{server:Server}>>

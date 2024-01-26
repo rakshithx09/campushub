@@ -21,41 +21,65 @@
   }
 </script>
 
-<section class="mt-20 h-full w-full">
-  <form on:submit|preventDefault={login} class="space-y-4">
-    {#if message}
-      <div class="bg-red-800/70 p-4 w-full text-center">{message}</div>
-    {/if}
-
-    <label class="label">
+<section>
+  <form on:submit|preventDefault={login}>
+    <label>
       <span>Email</span>
       <input
-        class="input"
         type="email"
         placeholder="example@mail.com"
         bind:value={email}
         required
       />
     </label>
-    <label class="label">
+    <label>
       <span>Password</span>
-      <input
-        class="input"
-        type="password"
-        placeholder=""
-        bind:value={password}
-        required
-      />
+      <input type="password" bind:value={password} required />
     </label>
 
-    <button class="btn variant-filled w-full">Login</button>
+    <button>Login</button>
   </form>
 </section>
 
 <style>
+  section {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   form {
     width: 100%;
     max-width: 400px;
-    margin: auto;
+    flex-grow: 1;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: color-mix(in srgb, currentColor 20%, transparent);
+    border-radius: var(--radius);
+  }
+
+  label {
+    display: block;
+    width: 100%;
+  }
+
+  input {
+    height: 2.5rem;
+    width: 100%;
+    padding: 0.2rem;
+  }
+
+  button {
+    background-color: var(--bg-accent);
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: var(--radius);
   }
 </style>
