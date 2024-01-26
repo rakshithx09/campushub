@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getChannels } from "$lib/db/pocketbase";
+  import { createChannel, deleteChannel, getChannels } from "$lib/db/pocketbase";
   import { channelSelected } from "$lib/stores";
   import type { BaseUser, Server } from "$lib/types";
 
@@ -14,19 +14,52 @@
     return channels;
   }
 
+  let createDialog: HTMLDialogElement;
+  let deleteDialog: HTMLDialogElement;
+
   $: channelsRequest = updateChannelSet(server.id);
+
+  let channelName = "";
+  let channelIdToDelete:string|null;
+
+  async function onCreateChannel() {
+    if (channelName) {
+      await createChannel(channelName, server);
+      channelsRequest = updateChannelSet(server.id);
+      channelName = "";
+    }
+  }
+
+
+  
+
+  async function onDeleteChannel() {
+    if (channelIdToDelete) {
+      await deleteChannel(channelIdToDelete);
+      channelsRequest = updateChannelSet(server.id);
+      channelIdToDelete = "";
+    }
+  }
 </script>
 
-<section
->
+<section>
   <h1>
     <span class="heading">{server.name}</span>
 
-    {#if user.id==server.owner}
+    {#if user.id == server.owner}
       <span class="option-container">
         <span>...</span>
         <div class="options">
-            <button>create channel</button>
+          <button
+            on:click={() => {
+              createDialog.showModal();
+            }}>create channel</button
+          >
+          <button
+            on:click={() => {
+              deleteDialog.showModal();
+            }}>delete channel</button
+          >
         </div>
       </span>
     {/if}
@@ -49,11 +82,43 @@
   {:catch bar}
     <span>error: {bar}</span>
   {/await}
+
+  <dialog bind:this={createDialog} on:submit={onCreateChannel}>
+    <p>Create server</p>
+    <form method="dialog">
+      <label>
+        <span>name</span>
+        <input type="text" name="name" required bind:value={channelName} />
+      </label>
+      <button>Create channel</button>
+    </form>
+  </dialog>
+
+  <dialog bind:this={deleteDialog} on:submit={onDeleteChannel}>
+    <p>Create server</p>
+    <form method="dialog">
+      <!-- svelte-ignore a11y-label-has-associated-control -->
+      <label>
+        <p>channel</p>
+        {#await channelsRequest}
+          <span>...loading</span>
+        {:then channels}
+          <select bind:value={channelIdToDelete}>
+            {#each channels as channel (channel.id)}
+              <option value={channel.id}>
+                #{channel.name}
+              </option>
+            {/each}
+          </select>
+        {/await}
+      </label>
+      <button class="bg-red-700">delete channel</button>
+    </form>
+  </dialog>
 </section>
 
-
 <style>
-  section{
+  section {
     display: flex;
     flex-direction: column;
     background-color: var(--bg-secondary);
@@ -63,41 +128,46 @@
     color: var(--secondary);
   }
 
-  h1{
+  h1 {
     background: var(--bg-accent);
-    padding: .5rem;
+    padding: 0.5rem;
     font-size: 1.2rem;
     display: flex;
     align-items: center;
   }
 
-  .heading{
+  .heading {
     flex-grow: 1;
   }
 
-  button{
+  button {
     color: var(--secondary);
-    padding: .5rem;
+    padding: 0.5rem;
   }
 
-  .selected{
+  .selected {
     background-color: var(--bg-active);
   }
 
-  .option-container{
+  .option-container {
     position: relative;
   }
 
-  .option-container:hover .options{
-      display: block;
-    }
+  .option-container:hover .options {
+    display: block;
+  }
 
-  .options{
+  .options {
     display: none;
     position: absolute;
-    font-size: .9rem;
+    font-size: 0.9rem;
     background-color: var(--bg-surface);
     width: max-content;
-    padding: .25rem;
+    padding: 0.25rem;
+    left: -50%;
+  }
+
+  dialog {
+    margin: auto;
   }
 </style>
