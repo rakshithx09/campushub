@@ -62,7 +62,6 @@ Feb 6 : code submission and video demo ( 5 minutes of video )
 
 - [ ]  resources hardcoded
 - [ ]  task conduction should see (additional implementation)
-- [ ]  AI  api fetch ( additional feature )
 - [ ]  courses hardcoded
 - [ ]  grades checking ( additional feature)
 - [ ]  attendence(rakshith)
