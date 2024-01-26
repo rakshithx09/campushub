@@ -114,27 +114,30 @@
       name="prompt"
       placeholder="Write a message..."
       rows="1"
+      on:keydown={(e)=>{e.key==='Enter' ? sendMessage() : null}}
     />
-    <button on:click={sendMessage}> Send</button>
+    <button on:click={sendMessage} > Send</button>
   </div>
 </section>
 
 <style>
   section {
     width: 100%;
-    min-height: 100%;
+    min-height: calc( 100vh - 80px);
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
+    padding-bottom: 45px;
   }
 
-  /* .messages {
-    padding: 1rem;
+  .messages {
+    /* padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-  } */
+    gap: 0.5rem; */
+   /*  height: 100%; */
+  }
 
   /* .avatar {
     object-fit: cover;
@@ -179,11 +182,12 @@
   } */
 
   .message-box {
-    margin-top: auto;
+    
     height: 40px;
     display: grid;
     grid-template-columns: 40px auto 80px;
-    position: sticky;
+    position: absolute;
+    bottom: 0;
     bottom: 0;
     width: 100%;
   }

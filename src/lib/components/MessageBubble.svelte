@@ -14,7 +14,7 @@
 </script>
 
 <div
-  class={`chat  ${
+  class={`chat mt-auto ${
     message.user.id == currentUser.id ? "chat-end" : "chat-start"
   }`}
 >
@@ -29,6 +29,7 @@
   </div>
   <div class="chat-header">
     @{message.user.name}
+    <time class="text-xs opacity-50">12:45</time>
   </div>
   <div class="chat-bubble">{message.content}</div>
 </div>

@@ -24,6 +24,8 @@
 
 <style>
   header{
+    position: sticky;
+    top: 0;
     width: 100%;
     max-height: 100px;
     padding: 1rem 2rem;
