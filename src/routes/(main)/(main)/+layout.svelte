@@ -3,7 +3,6 @@
   import ServerSidebar from "$lib/components/ServerSidebar.svelte";
   import ChannelSideBar from "$lib/components/ChannelSideBar.svelte";
   import Login from "$lib/components/Login.svelte";
-  import Chatbot from "$lib/components/Chatbot.svelte";
 
   $: user = $currentUser;
   $: server = $serverSelected;

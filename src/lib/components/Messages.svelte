@@ -36,7 +36,7 @@
           if (record.channel == channelId) {
             const user = await pb
               .collection<BaseUser>("users")
-              .getOne(record.user);
+              .getOne(record.user!);
             record.expand = { user };
             messages = [...messages, record];
           }
@@ -91,7 +91,7 @@
         >
           <div class="inner-message">
             <div class="message-head">
-              <span>@{message.user.username}</span>
+              <span>@{message.user.name}</span>
               <small>{message.createdAt}</small>
             </div>
             <p>{message.content}</p>

@@ -14,7 +14,7 @@
     <a href="/resources">resources</a>
     {#if user?.username}
       <div class="profile">
-        <span >{user.username}</span>
+        <span >{user.name}</span>
         <button class="logout" on:click={logout}> Log Out</button>
       </div>
     {/if}
