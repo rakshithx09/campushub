@@ -123,7 +123,7 @@
     flex-direction: column;
     background-color: var(--bg-secondary);
     border-right: 2px solid var(--border);
-    width: 10rem;
+    width: 15rem;
     text-align: center;
     color: var(--secondary);
   }
