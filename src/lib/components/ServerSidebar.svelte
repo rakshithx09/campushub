@@ -16,14 +16,14 @@
     {#each serverResponse as server (server.id)}
       <button
         on:click={() => {
-          serverSelected.set(server.expand?.server);
+          serverSelected.set(server);
           goto("/");
         }}
       >
         <img
-          src={getImageUrl(server.expand?.server, server.expand?.server.image)}
-          alt={server.expand?.server.name}
-          class={$serverSelected?.id == server.expand?.server.id ? "selected" : ""}
+          src={getImageUrl(server, server.image)}
+          alt={server.name}
+          class={$serverSelected?.id == server.id ? "selected" : ""}
         />
       </button>
     {/each}

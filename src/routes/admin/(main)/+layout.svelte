@@ -1,28 +1,49 @@
 <script lang="ts">
-    import { AppShell } from "@skeletonlabs/skeleton";
-    import { admin as adminStore } from "$lib/stores/admin";
-    import { onMount } from "svelte";
-    import { goto } from "$app/navigation";
-  
-    onMount(() => {
-      if (!$adminStore) {
-        goto("/admin/login");
-      }
-    });
-  
-    $: admin = $adminStore!;
-  </script>
-  
-  <AppShell>
-    <svelte:fragment slot="sidebarLeft">
-      <section
-        class="flex flex-col gap-4 align-middle p-4 bg-surface-50-900-token h-full"
-      >
-        <a href="/admin/servers">servers</a>
-      </section>
-    </svelte:fragment>
-  
+  import { admin as adminStore } from "$lib/stores/admin";
+  import { onMount } from "svelte";
+  import { goto } from "$app/navigation";
+
+  console.log($adminStore)
+
+  onMount(() => {
+    if (!$adminStore) {
+      goto("/admin/login");
+    }
+  });
+
+  $: admin = $adminStore!;
+</script>
+
+<main>
+  <section class="sidebar">
+    <a href="/admin/servers">servers</a>
+  </section>
+  <div class="content">
     <slot />
-  
-    <svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
-  </AppShell>
+  </div>
+</main>
+
+<style>
+  main {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 80px);
+  }
+
+  .content {
+    flex-grow: 1;
+    width: 100%;
+    overflow-y: scroll;
+    min-height: 100%;
+  }
+
+  .sidebar{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-secondary);
+    border-right: 2px solid var(--border);
+    width: 10rem;
+    text-align: center;
+    color: var(--secondary);
+  }
+</style>

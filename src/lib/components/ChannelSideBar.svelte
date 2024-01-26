@@ -1,9 +1,10 @@
 <script lang="ts">
   import { getChannels } from "$lib/db/pocketbase";
   import { channelSelected } from "$lib/stores";
-  import type { Server } from "$lib/types";
+  import type { BaseUser, Server } from "$lib/types";
 
   export let server: Server;
+  export let user: BaseUser;
 
   async function updateChannelSet(serverId: string) {
     const channels = await getChannels(serverId);
@@ -19,7 +20,16 @@
 <section
 >
   <h1>
-    {server.name}
+    <span class="heading">{server.name}</span>
+
+    {#if user.id==server.owner}
+      <span class="option-container">
+        <span>...</span>
+        <div class="options">
+            <button>create channel</button>
+        </div>
+      </span>
+    {/if}
   </h1>
   {#await channelsRequest}
     <span>...loading</span>
@@ -57,6 +67,12 @@
     background: var(--bg-accent);
     padding: .5rem;
     font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .heading{
+    flex-grow: 1;
   }
 
   button{
@@ -66,5 +82,22 @@
 
   .selected{
     background-color: var(--bg-active);
+  }
+
+  .option-container{
+    position: relative;
+  }
+
+  .option-container:hover .options{
+      display: block;
+    }
+
+  .options{
+    display: none;
+    position: absolute;
+    font-size: .9rem;
+    background-color: var(--bg-surface);
+    width: max-content;
+    padding: .25rem;
   }
 </style>

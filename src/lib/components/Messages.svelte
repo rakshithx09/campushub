@@ -80,9 +80,9 @@
   }
 </script>
 
-<section use:scrollChatBottom={messages}>
+<section>
   {#if messages}
-    <div class="messages">
+    <div class="messages" use:scrollChatBottom={messages}>
       {#each formatMessage(messages) as message (message.id)}
         <div
           class={`message  ${
@@ -120,6 +120,10 @@
   section {
     width: 100%;
     min-height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .messages {
@@ -176,6 +180,9 @@
     height: 40px;
     display: grid;
     grid-template-columns: 40px auto 80px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
   }
 
   .message-box button {

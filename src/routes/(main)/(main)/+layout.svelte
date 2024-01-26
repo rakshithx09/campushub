@@ -1,7 +1,7 @@
 <script lang="ts">
   import { serverSelected, currentUser } from "$lib/stores";
   import ServerSidebar from "$lib/components/ServerSidebar.svelte";
-  import ChannelSiderBar from "$lib/components/ChannelSiderBar.svelte";
+  import ChannelSideBar from "$lib/components/ChannelSideBar.svelte";
   import Login from "$lib/components/Login.svelte";
 
   $: user = $currentUser;
@@ -12,7 +12,7 @@
   {#if user}
     <ServerSidebar {user} />
     {#if server}
-      <ChannelSiderBar {server} />
+      <ChannelSideBar {server} {user}/>
     {/if}
     <div class="content">
       <slot/>
