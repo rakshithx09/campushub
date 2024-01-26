@@ -57,43 +57,20 @@ Feb 6 : code submission and video demo ( 5 minutes of video )
 
 
 
-**Then, answer these questions:**
-> 
-> - Question 1: Does everyone know what are we launching?
->     - [ ]  **Internal alignment**
->         - [ ]  Can we explain what this change is?
->         - [ ]  Have you shared details of this change with other functions?
->     - [ ]  **External messaging**
->         - [ ]  How are we going to communicate our launch to customers?
->         - [ ]  How will customers understand changes due to this launch?
-> - Question 2: Are we sure this is going to work?
->     - [ ]  **Quality**
->         - [ ]  Has this product been tested appropriately?
->         - [ ]  Have we checked for effects on other products?
->         - [ ]  Have we done capacity planning?
->         - [ ]  Do we have a contingency plan if the launch doesn’t go well?
->     - [ ]  **Measurement**
->         - [ ]  Do we know how to tell if this launch is a success or not?
->         - [ ]  Can others see how this launch is going?
-> - Question 3: What are our launch steps?
->     - [ ]  **Plan**
->         - [ ]  Have you agreed on launch audiences with PMM?
->         - [ ]  Did we agree on launch steps with PMM?
-> 
-> *🚀 It’s go time!*
-> 
-- *... and feel free to link to other more detailed documents*
-****
-
 # To -do:
 
-- [ ]  UI designs by sunday
-- [ ]  pocketbase backend
-- [ ]  admin can create channels
+
 - [ ]  resources hardcoded
-- [ ]  task conduction should see (last implementation)
+- [ ]  task conduction should see (additional implementation)
 - [ ]  AI  api fetch ( additional feature )
 - [ ]  courses hardcoded
 - [ ]  grades checking ( additional feature)
+- [ ]  attendence(rakshith)
+- [ ]  task conduction (hardcoded- kannada )
+- [ ]  images uploadation( karthik )
+- [ ]  ui update (rakshith)
+- [ ]  channel where core people can talk
+- [ ]  
 
-# Embed the ai bot to all pages @rakshith & @karthik
+
+
