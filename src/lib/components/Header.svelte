@@ -2,7 +2,8 @@
   import nitteLogo from "$lib/assets/nitte.svg";
   import type { BaseUser } from "$lib/types";
   import { logout } from "$lib/db/pocketbase";
-    import { reset } from "$lib/utils";
+  import { reset } from "$lib/utils";
+  import Profile from "./Profile.svelte";
 
   export let user: BaseUser | null;
 </script>
@@ -14,20 +15,23 @@
     <a href="/resources">resources</a>
     {#if user?.username || user?.email}
       <div class="profile">
-        <span >{user.name?? user?.email}</span>
+        <span>{user.name ?? user?.email}</span>
         <button class="logout" on:click={logout}> Log Out</button>
+        
       </div>
+      <Profile {user}/>
+      
     {/if}
+    
   </nav>
 </header>
 
-
 <style>
-  header{
+  header {
     position: sticky;
     top: 0;
     width: 100%;
-    max-height: 100px;
+    height: 80px;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -35,24 +39,24 @@
     background-color: var(--bg-accent);
   }
 
-  nav{
+  nav {
     display: flex;
-    gap:1rem;
+    gap: 1rem;
   }
 
-  .profile{
+  .profile {
     position: relative;
   }
 
-  .profile:hover .logout{
+  .profile:hover .logout {
     display: block;
   }
 
-  .logout{
+  .logout {
     position: absolute;
     display: none;
     background: rgb(135, 21, 21);
-    font-size: .9rem;
-    padding: .25rem .5rem;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
   }
 </style>

@@ -43,31 +43,6 @@
     justify-content: center;
     align-items: center;
   }
-  form {
-    width: 100%;
-    max-width: 400px;
-    flex-grow: 1;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    gap:1rem;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    background-color: color-mix(in srgb, currentColor 20%, transparent);
-    border-radius: var(--radius);
-  }
-
-  label{
-    display: block;
-    width: 100%;
-  }
-
-  input{
-    height: 2.5rem;
-    width: 100%;
-    padding: .2rem;
-  }
 
   button{
     background-color: var(--bg-accent);

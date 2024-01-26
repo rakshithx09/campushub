@@ -16,7 +16,8 @@
   
     {#each serverResponse as server (server.id)}
       <button
-      class={ ` ${$serverSelected?.id == server.id ? "serverSelected" : ""}`}
+      data-overlay={server.name}
+      class={ `overlay ${$serverSelected?.id == server.id ? "serverSelected" : ""}`}
         on:click={() => {
           serverSelected.set(server);
           goto("/");

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
     --primary: #FFFFFF;
     --secondary: #FFFFFF;
@@ -15,10 +16,10 @@
     --bg-active: #000000;
     --bg-hover: #000000;
 
-    --radius:5px;
+    --radius: 5px;
 
-    --border:rgba(0,0,0,.4);
-    
+    --border: rgba(0, 0, 0, .4);
+
     color-scheme: light;
 }
 
@@ -37,7 +38,7 @@
         --bg-active: #3b3b3b;
         --bg-hover: #000000;
 
-        --border:rgba(255,255,255,.4);
+        --border: rgba(255, 255, 255, .4);
         color-scheme: dark;
 
     }
@@ -127,7 +128,62 @@ small {
     font-size: .8rem;
 }
 
-a,a:visited{
+a,
+a:visited {
     text-decoration: none;
-    font:inherit;
+    font: inherit;
+}
+
+form {
+    width: 100%;
+    max-width: 400px;
+    flex-grow: 1;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: color-mix(in srgb, currentColor 20%, transparent);
+    border-radius: var(--radius);
+}
+
+label {
+    display: block;
+    width: 100%;
+}
+
+input {
+    height: 2.5rem;
+    width: 100%;
+    padding: .2rem;
+}
+
+
+form button {
+    width: 100%;
+    background-color: var(--bg-accent);
+}
+
+
+
+.overlay {
+    position: relative;
+}
+
+.overlay::after {
+    position: absolute;
+    color: white;
+    bottom: -30px;
+    background-color: rgb(28, 28, 28);
+    padding: 2px 4px;
+    z-index: 10;
+    left:50%;
+    font-size: .7rem;
+    width: max-content;
+}
+
+.overlay:hover::after {
+    content: attr(data-overlay) "";
 }
