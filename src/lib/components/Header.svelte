@@ -12,9 +12,9 @@
 
   <nav>
     <a href="/resources">resources</a>
-    {#if user?.username}
+    {#if user?.username || user?.email}
       <div class="profile">
-        <span >{user.name}</span>
+        <span >{user.name?? user?.email}</span>
         <button class="logout" on:click={logout}> Log Out</button>
       </div>
     {/if}
