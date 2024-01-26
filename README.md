@@ -69,7 +69,9 @@ Feb 6 : code submission and video demo ( 5 minutes of video )
 - [ ]  images uploadation( karthik )
 - [ ]  ui update (rakshith)
 - [ ]  channel where core people can talk
+- [ ]  marks list.. (addditonal feature)
 - [ ]  
+
 
 
 
