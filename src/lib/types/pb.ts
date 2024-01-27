@@ -6,7 +6,9 @@ import type PocketBase from 'pocketbase'
 import type { RecordService } from 'pocketbase'
 
 export enum Collections {
+	Attendence = "attendence",
 	Channels = "channels",
+	Courses = "courses",
 	Departments = "departments",
 	Lecturers = "lecturers",
 	Members = "members",
@@ -40,7 +42,22 @@ export type AuthSystemFields<T = never> = {
 
 // Record types for each collection
 
+export type AttendenceRecord = {
+	course: RecordIdString
+	date: IsoDateString
+	note?: string
+	period: number
+	present?: boolean
+	student: RecordIdString
+}
+
 export type ChannelsRecord = {
+	name: string
+	server: RecordIdString
+}
+
+export type CoursesRecord = {
+	instructor: RecordIdString
 	name: string
 	server: RecordIdString
 }
@@ -79,7 +96,16 @@ export type ServersRecord = {
 	type: ServersTypeOptions
 }
 
+export enum StudentsSectionOptions {
+	"A" = "A",
+	"B" = "B",
+	"C" = "C",
+	"D" = "D",
+}
 export type StudentsRecord = {
+	branch?: string
+	section?: StudentsSectionOptions
+	sem?: number
 	user?: RecordIdString
 	usn: string
 }
@@ -96,7 +122,9 @@ export type UsersRecord = {
 }
 
 // Response types include system fields and match responses from the PocketBase API
+export type AttendenceResponse<Texpand = unknown> = Required<AttendenceRecord> & BaseSystemFields<Texpand>
 export type ChannelsResponse<Texpand = unknown> = Required<ChannelsRecord> & BaseSystemFields<Texpand>
+export type CoursesResponse<Texpand = unknown> = Required<CoursesRecord> & BaseSystemFields<Texpand>
 export type DepartmentsResponse<Texpand = unknown> = Required<DepartmentsRecord> & BaseSystemFields<Texpand>
 export type LecturersResponse<Texpand = unknown> = Required<LecturersRecord> & BaseSystemFields<Texpand>
 export type MembersResponse<Texpand = unknown> = Required<MembersRecord> & BaseSystemFields<Texpand>
@@ -108,7 +136,9 @@ export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSyste
 // Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
+	attendence: AttendenceRecord
 	channels: ChannelsRecord
+	courses: CoursesRecord
 	departments: DepartmentsRecord
 	lecturers: LecturersRecord
 	members: MembersRecord
@@ -119,7 +149,9 @@ export type CollectionRecords = {
 }
 
 export type CollectionResponses = {
+	attendence: AttendenceResponse
 	channels: ChannelsResponse
+	courses: CoursesResponse
 	departments: DepartmentsResponse
 	lecturers: LecturersResponse
 	members: MembersResponse
@@ -133,7 +165,9 @@ export type CollectionResponses = {
 // https://github.com/pocketbase/js-sdk#specify-typescript-definitions
 
 export type TypedPocketBase = PocketBase & {
+	collection(idOrName: 'attendence'): RecordService<AttendenceResponse>
 	collection(idOrName: 'channels'): RecordService<ChannelsResponse>
+	collection(idOrName: 'courses'): RecordService<CoursesResponse>
 	collection(idOrName: 'departments'): RecordService<DepartmentsResponse>
 	collection(idOrName: 'lecturers'): RecordService<LecturersResponse>
 	collection(idOrName: 'members'): RecordService<MembersResponse>

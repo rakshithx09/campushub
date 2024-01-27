@@ -1,7 +1,10 @@
-import type { Channel, MemberWithServer, MessageWithUser, Server } from '$lib/types';
+import type { assets } from '$app/paths';
+import type { BaseUser, Channel, MemberWithServer, MessageWithUser, Server, Student } from '$lib/types';
+import { Collections, ServersTypeOptions, type MembersRecord, type CoursesRecord } from '$lib/types/pb';
 import PocketBase from 'pocketbase';
 
-export const pb = new PocketBase('http://127.0.0.1:8090');
+const url = 'http://127.0.0.1:8090'
+export const pb = new PocketBase(url);
 
 export function logout() {
     pb.authStore.clear();
@@ -53,13 +56,114 @@ export async function getAllViewableServers(userId: string) {
 }
 
 
-export async function createChannel(name:string,server:Server){
+export async function createChannel(name: string, server: Server) {
     await pb.collection('channels').create({
-        name:name,
-        server:server.id
+        name: name,
+        server: server.id
     });
 }
 
-export async function deleteChannel(channelId:string){
+export async function deleteChannel(channelId: string) {
     await pb.collection('channels').delete(channelId);
+}
+
+export const serverTypes = Object.values(ServersTypeOptions);
+
+// export const getUniqueYear(){
+
+// }
+
+export async function getUniqueSems() {
+    return pb.send<string[]>("/custom/unique/sem", {})
+}
+
+export async function getUniqueBranchs() {
+    return pb.send<string[]>("/custom/unique/branch", {})
+}
+
+export async function getUniqueSections() {
+    return pb.send<string[]>("/custom/unique/section", {})
+}
+
+
+export interface LecturerModel {
+    id: string,
+    email: string,
+    avatar: string,
+    name: string,
+    role: string,
+    department: string,
+    post: string
+}
+
+export async function getAllLecturers() {
+    return await pb.send<LecturerModel[]>("/custom/lecturers", {})
+}
+
+export async function getAllUsers() {
+    return await pb.collection<BaseUser>(Collections.Users).getFullList()
+}
+
+export async function createSubjectServer(servername: string, ownerId: string, branch: string, sem: string, section: string, image: any) {
+    const server = await pb.collection<Server>('servers').create({
+        name: servername,
+        type: ServersTypeOptions.SUBJECT,
+        owner: ownerId,
+        image: image
+    });
+
+    const students = await pb.collection<Student>(Collections.Students).getFullList({
+        filter: `branch = "${branch}" && sem = "${sem}" && section = "${section}"`
+    })
+
+    await pb.collection<MembersRecord>(Collections.Members).create({
+        server: server.id,
+        user: ownerId
+    })
+
+    await pb.collection<CoursesRecord>(Collections.Courses).create({
+        name: servername,
+        instructor: ownerId,
+        server: server.id
+    })
+
+    for (const student of students) {
+        await pb.collection<MembersRecord>(Collections.Members).create({
+            server: server.id,
+            user: student.user
+        })
+    }
+}
+
+export async function createClubServer(servername: string, ownerId: string, image: any) {
+    const server = await pb.collection<Server>('servers').create({
+        name: servername,
+        type: ServersTypeOptions.SUBJECT,
+        owner: ownerId,
+        image: image
+    });
+
+    await pb.collection<MembersRecord>(Collections.Members).create({
+        server: server.id,
+        user: ownerId
+    })
+}
+
+
+export async function createGeneralServer(servername: string, ownerId: string, image: any) {
+    const server = await pb.collection<Server>('servers').create({
+        name: servername,
+        type: ServersTypeOptions.SUBJECT,
+        owner: ownerId,
+        image: image
+    });
+
+    await pb.collection<MembersRecord>(Collections.Members).create({
+        server: server.id,
+        user: ownerId
+    })
+}
+
+export async function deleteServer(serverId: string) {
+    await pb.collection(Collections.Servers).delete(serverId);
 }
