@@ -48,17 +48,17 @@
 
     {#if user.id == server.owner}
     <div class="dropdown bg-transparent">
-      <div tabindex="0" role="button" class="flex items-center h-1"><span>...</span></div>
+      <div tabindex="0" role="button" class="flex items-center h-1"><span class="three-dots">...</span></div>
       <ul  class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[9rem]">
         <li><button
             on:click={() => {
               createDialog.showModal();
-            }}>create channel</button
+            }}>Create Channel</button
           ></li>
         <li><button
             on:click={() => {
               deleteDialog.showModal();
-            }}>delete channel</button
+            }}>Delete Channel</button
           ></li>
       </ul>
     </div>
@@ -83,7 +83,7 @@
     <span>...loading</span>
   {:then channels}
     {#each channels as channel (channel.id)}
-      <button
+      <button 
         class={` bg-surface-hover-token p-2 ${
           $channelSelected?.id == channel.id ? "selected" : ""
         }`}
@@ -99,18 +99,18 @@
   {/await}
 
   <dialog bind:this={createDialog} on:submit={onCreateChannel}>
-    <p>Create server</p>
+    <p>Create Channel</p>
     <form method="dialog">
       <label>
-        <span>name</span>
+        <span >name</span>
         <input type="text" name="name" required bind:value={channelName} />
       </label>
-      <button>Create channel</button>
+      <button>Create Channel</button>
     </form>
   </dialog>
 
   <dialog bind:this={deleteDialog} on:submit={onDeleteChannel}>
-    <p>Create server</p>
+    <p>Create Channel</p>
     <form method="dialog">
       <!-- svelte-ignore a11y-label-has-associated-control -->
       <label>
@@ -127,7 +127,7 @@
           </select>
         {/await}
       </label>
-      <button class="bg-red-700">delete channel</button>
+      <button class="bg-red-700">Delete Channel</button>
     </form>
   </dialog>
 </section>
@@ -158,6 +158,9 @@
   button {
     color: var(--secondary);
     padding: 0.5rem;
+   
+    
+
   }
 
   .selected {
@@ -175,7 +178,8 @@
   .options {
     display: none;
     position: absolute;
-    font-size: 0.9rem;
+    font-size: 0.9
+    rem;
     background-color: var(--bg-surface);
     width: max-content;
     padding: 0.25rem;
@@ -184,5 +188,31 @@
 
   dialog {
     margin: auto;
+    border-radius: 15px;
+    background-color: rgba(65, 65, 63, 0.24);
+    font-family: 'Times New Roman', Times, serif;
+    padding: 2%;
   }
+  dialog form{
+    background-color: rgba(65, 65, 63, 0);
+  }
+  .bg-surface-hover-token {
+    font-family: 'EB Garamond', serif;
+    font-weight: 700;
+    font-size: medium;
+  
+  }
+  .heading {
+    font-family: 'Irish Grover', system-ui;
+    font-size: 32px;
+  }
+  .three-dots{
+   margin-bottom: 10px;
+   margin-right: 0.2rem;
+  font-size: 25px;
+  font-weight: 700;
+  }
+  
+  
+ 
 </style>

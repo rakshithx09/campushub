@@ -108,8 +108,8 @@
   {/if}
 
   <div class="message-box">
-    <button class="left">+</button>
-    <textarea
+    <button class="left"><img src="src\lib\assets\picupload.svg" alt=""></button>
+    <input
       bind:value={newMessage}
       class="textarea"
       name="prompt"
@@ -131,6 +131,7 @@
     justify-content: flex-end;
     padding-bottom: 90px;
     z-index: 0;
+    padding-left: 15px;
   }
 
   .messages {
@@ -170,7 +171,7 @@
 
   /* .inner-message {
     flex-grow: 1;
-  } */s
+  } */
 
   p {
     padding: 0;
@@ -200,11 +201,15 @@
     background-color: rgba(90, 90, 118, 0.308);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    padding-left: 8px;
   }
   .message-box .right {
     background-color: rgba(90, 90, 118, 0.308);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+     font-family: 'Inter', sans-serif;
+font-family: 'Irish Grover', system-ui;
+font-weight: 500;
   }
   .textarea{
     background-color: rgba(90, 90, 118, 0.308);
