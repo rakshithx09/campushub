@@ -14,11 +14,11 @@
   <nav>
     <a href="/resources">resources</a>
     {#if user?.username || user?.email}
-      <div class="profile">
+      <!-- <div class="profile">
         <span>{user.name ?? user?.email}</span>
         <button class="logout" on:click={logout}> Log Out</button>
         
-      </div>
+      </div> -->
       <Profile {user}/>
       
     {/if}
@@ -37,10 +37,12 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--bg-accent);
+    z-index: 3;
   }
 
   nav {
     display: flex;
+    align-items: center;
     gap: 1rem;
   }
 
@@ -59,4 +61,9 @@
     font-size: 0.9rem;
     padding: 0.25rem 0.5rem;
   }
+  a{
+    display: flex;
+    align-items: center;
+  }
+  
 </style>

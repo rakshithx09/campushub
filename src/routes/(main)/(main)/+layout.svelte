@@ -38,5 +38,6 @@
     width: 100%;
     overflow-y: scroll;
     min-height: 100%;
+    
   }
 </style>

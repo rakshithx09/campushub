@@ -8,6 +8,6 @@
 </script>
 
 <Header {user} />
-
+<!-- <Profile user={user ? user : null} /> -->
 <slot />
 <Footer/>

@@ -129,6 +129,7 @@
     flex-direction: column;
     justify-content: flex-end;
     padding-bottom: 45px;
+    z-index: 0;
   }
 
   .messages {
