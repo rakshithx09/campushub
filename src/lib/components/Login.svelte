@@ -13,7 +13,7 @@
   <form on:submit|preventDefault={login}>
     <label>
       <span>Email</span>
-      <input
+      <input class="input"
         type="email"
         placeholder="example@mail.com"
         bind:value={email}
@@ -22,7 +22,7 @@
     </label>
     <label>
       <span>Password</span>
-      <input
+      <input class="input"
         type="password"
         bind:value={password}
         required
@@ -31,6 +31,7 @@
 
     <button>Login</button>
   </form>
+  
 </section>
 
 <style>
@@ -42,13 +43,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(to top left,  #83878a77 , #021942);
   }
 
   button{
     background-color: var(--bg-accent);
-    width: 100%;
+    width: 50%;
     padding: .5rem;
-    border-radius: var(--radius);
+    border-radius: 40px;
+    font-family: 'Courier New', Courier, monospace;
   }
+  form {
+	margin:2% auto 0 auto;
+	padding:30px;
+	width:400px;
+	height:auto;
+	overflow:hidden;
+	background:rgba(241, 241, 241, 0.123);
+	border-radius:10px;
+}
+form label {
+	font-size:20px;
+	color:rgb(252, 252, 252);
+	cursor:pointer;
+  font-family: 'Courier New', Courier, monospace;
+}
+.input
+{
+  background-color: #0c3c64d2;
+  border-radius: 10px;
+}
 
 </style>
