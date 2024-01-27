@@ -187,3 +187,7 @@ form button {
 .overlay:hover::after {
     content: attr(data-overlay) "";
 }
+
+dialog{
+    margin: auto;
+}
