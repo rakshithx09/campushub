@@ -1,20 +1,29 @@
 <script lang="ts">
   import { getAllServers, getImageUrl } from "$lib/db/pocketbase";
-  import { ServersTypeOptions } from "$lib/types/pb";
+  import { deleteServer } from "$lib/db/pocketbase";
 
-  const serverTypes = Object.values(ServersTypeOptions);
+  let deleteServerId: string;
+  let deleteDialog: HTMLDialogElement;
+  let servers = getAllServers()
+
+   async function onDeleteServer() {
+    if (deleteServerId) {
+      await deleteServer(deleteServerId);
+      servers = getAllServers()
+    }
+  }
 </script>
 
 <section>
   <div class="acitvity-bar">
     <div>
-      <input type="text" />
-      <button></button>
+      <input type="text" placeholder="search server" />
+      <button>Search</button>
     </div>
-    <button> create server </button>
+    <a href="servers/create" class="bg-green-600"> create server </a>
   </div>
   <div class="servers">
-    {#await getAllServers()}
+    {#await servers}
       <span>...loading</span>
     {:then servers}
       {#each servers as server (server.id)}
@@ -25,7 +34,13 @@
             class="w-full aspect-video"
           />
           <span>{server.name}</span>
-          <button class="delete">Delete</button>
+          <button
+            class="delete"
+            on:click={() => {
+              deleteDialog.showModal();
+              deleteServerId = server.id;
+            }}>Delete</button
+          >
         </div>
       {/each}
     {:catch err}
@@ -33,24 +48,13 @@
     {/await}
   </div>
 
-  <dialog open>
-    <p>Create server</p>
+  <dialog bind:this={deleteDialog} on:submit={onDeleteServer}>
+    <p>delete server</p>
     <form method="dialog">
-      <div>
-        <label>
-          <span>name</span>
-          <input type="text"/>
-        </label>
-        <label>
-          <span>type</span>
-          <select value={serverTypes[0]}>
-            {#each serverTypes as option}
-              <option value={option}>{option}</option>
-            {/each}
-          </select>
-        </label>
-      </div>
-      <button>Create</button>
+      <p>
+        are you really want to delete {deleteServerId} once deleted cannot be undone
+      </p>
+      <button class="bg-red-700">delete channel</button>
     </form>
   </dialog>
 </section>
@@ -85,32 +89,7 @@
     width: 100%;
   }
 
-  dialog {
-    margin: auto;
-  }
-
-
-  form {
-    width: 100%;
-    max-width: 400px;
-    flex-grow: 1;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    background-color: color-mix(in srgb, currentColor 20%, transparent);
-    border-radius: var(--radius);
-  }
-
-  label {
-    display: block;
-    width: 100%;
-  }
-
-  input,select {
+  input {
     height: 2.5rem;
     width: 100%;
     padding: 0.2rem;
