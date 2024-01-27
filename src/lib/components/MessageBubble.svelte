@@ -14,9 +14,9 @@
 </script>
 
 <div
-  class={`chat mt-auto ${
+  class={`chat mt-auto ${/* 
     message.user.id == currentUser.id ? "chat-end" : "chat-start"
-  }`}
+   */"chat-start"}`}
 >
   <div class="chat-image avatar">
     <div class="w-10 rounded-full">
@@ -29,7 +29,7 @@
   </div>
   <div class="chat-header">
     @{message.user.name}
-    <time class="text-xs opacity-50">12:45</time>
+    <time class="text-xs opacity-50">{message.createdAt.slice(9,message.createdAt.length-6)}</time>
   </div>
   <div class="chat-bubble">{message.content}</div>
 </div>

@@ -47,7 +47,22 @@
     <span class="heading">{server.name}</span>
 
     {#if user.id == server.owner}
-      <span class="option-container">
+    <div class="dropdown bg-transparent">
+      <div tabindex="0" role="button" class="flex items-center h-1"><span>...</span></div>
+      <ul  class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[9rem]">
+        <li><button
+            on:click={() => {
+              createDialog.showModal();
+            }}>create channel</button
+          ></li>
+        <li><button
+            on:click={() => {
+              deleteDialog.showModal();
+            }}>delete channel</button
+          ></li>
+      </ul>
+    </div>
+      <!-- <span class="option-container">
         <span>...</span>
         <div class="options">
           <button
@@ -61,7 +76,7 @@
             }}>delete channel</button
           >
         </div>
-      </span>
+      </span> -->
     {/if}
   </h1>
   {#await channelsRequest}

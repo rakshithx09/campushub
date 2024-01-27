@@ -108,15 +108,16 @@
   {/if}
 
   <div class="message-box">
-    <button>+</button>
+    <button class="left">+</button>
     <textarea
       bind:value={newMessage}
+      class="textarea"
       name="prompt"
-      placeholder="Write a message..."
+      placeholder=""
       rows="1"
       on:keydown={(e)=>{e.key==='Enter' ? sendMessage() : null}}
     />
-    <button on:click={sendMessage} > Send</button>
+    <button on:click={sendMessage} class="right" > Send</button>
   </div>
 </section>
 
@@ -128,7 +129,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-bottom: 45px;
+    padding-bottom: 90px;
+    z-index: 0;
   }
 
   .messages {
@@ -168,7 +170,7 @@
 
   /* .inner-message {
     flex-grow: 1;
-  } */
+  } */s
 
   p {
     padding: 0;
@@ -182,17 +184,30 @@
   } */
 
   .message-box {
-    
     height: 40px;
-    display: grid;
-    grid-template-columns: 40px auto 80px;
-    position: absolute;
-    bottom: 0;
-    bottom: 0;
-    width: 100%;
+  display: grid;
+  grid-template-columns: 40px auto 80px;
+  position: absolute;  
+  bottom: 40px;  /* Adjust the value to lift it from the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  
+    
   }
 
-  .message-box button {
-    background-color: aqua;
+  .message-box .left {
+    background-color: rgba(90, 90, 118, 0.308);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  .message-box .right {
+    background-color: rgba(90, 90, 118, 0.308);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .textarea{
+    background-color: rgba(90, 90, 118, 0.308);
+    border-radius: 0;
   }
 </style>
