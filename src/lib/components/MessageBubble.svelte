@@ -31,7 +31,7 @@
     @{message.user.name}
     <time class="text-xs opacity-50">{message.createdAt.slice(9,message.createdAt.length-6)}</time>
   </div>
-  <div class="chat-bubble">{message.content}</div>
+  <p class="chat-bubble">{message.content}</p>
 </div>
 
 <style>
@@ -43,4 +43,16 @@
     aspect-ratio: 1;
     border-radius: 100%;
   } */
+  .chat-bubble{
+    font-family: 'Times New Roman', Times, serif;
+  }
+  .chat-header{
+   font-family: 'Inter', sans-serif;
+   font-weight: 100;
+   padding-bottom: 2px;
+   padding-top: 5px;
+
+
+  }
+  
 </style>

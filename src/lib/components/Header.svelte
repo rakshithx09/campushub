@@ -9,21 +9,24 @@
 </script>
 
 <header>
-  <button on:click={reset}><img src={nitteLogo} alt="NMAMIT NITTE" /></button>
-
+  
   <nav>
-    <a href="/resources">resources</a>
-    {#if user?.username || user?.email}
-      <!-- <div class="profile">
-        <span>{user.name ?? user?.email}</span>
-        <button class="logout" on:click={logout}> Log Out</button>
-        
-      </div> -->
-      <Profile {user}/>
-      
-    {/if}
-    
+    <a href="/" ><img src="src\lib\assets\message-icon.svg" class="msg-icon"alt="msg"></a>
+    <a href= "#">Courses</a>
+    <a href="/resources">Resources</a>
+   
   </nav>
+  <button on:click={reset} class="btn1">
+    <img src={nitteLogo} alt="NMAMIT NITTE" />
+  </button>
+
+
+  <div class="logo-section">
+    {#if user?.username || user?.email}
+      <Profile {user}/>
+    {/if}
+
+    
 </header>
 
 <style>
@@ -40,30 +43,32 @@
     z-index: 3;
   }
 
-  nav {
+  .logo-section {
     display: flex;
     align-items: center;
     gap: 1rem;
+  
   }
 
-  .profile {
-    position: relative;
-  }
-
-  .profile:hover .logout {
-    display: block;
-  }
-
-  .logout {
-    position: absolute;
-    display: none;
-    background: rgb(135, 21, 21);
-    font-size: 0.9rem;
-    padding: 0.25rem 0.5rem;
-  }
-  a{
+  nav {
     display: flex;
     align-items: center;
+    gap: 4rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+  }
+  .msg-icon{
+    height: 40px;
+  }
+  .btn1{
+    margin-left: auto;
+    margin-right: 40px;
   }
   
 </style>
