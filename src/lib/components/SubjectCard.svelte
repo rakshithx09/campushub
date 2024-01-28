@@ -136,6 +136,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; */
+    
 }
 
 :root{
@@ -143,11 +144,13 @@
     --color2: orange;
     --bgcolor: rgb(26, 25, 32);
     --textcolor: rgb(166, 164, 177);
+   
 }
 
 
 body{
     background-color: var(--bgcolor);
+   
     
     
 }
@@ -183,6 +186,7 @@ main{
     gap: 5rem;
     padding: 50px  ;
     overflow-y: scroll;
+   /* background: linear-gradient(to top left,  #83878a77 , #021942);*/
     
     
     
