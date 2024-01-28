@@ -14,9 +14,9 @@
 </script>
 
 <div
-  class={`chat mt-auto ${/* 
-    message.user.id == currentUser.id ? "chat-end" : "chat-start"
-   */"chat-start"}`}
+  class={`chat mt-auto chat-start ${
+    message.user.id == currentUser.id ? "yourText" : ""
+  }`}
 >
   <div class="chat-image avatar">
     <div class="w-10 rounded-full">
