@@ -107,14 +107,14 @@
     <p>No message let you be the first to start conversation</p>
   {/if}
 
-  <div class="message-box">
+  <div class="message-box" >
     <button class="left"><img src="src\lib\assets\picupload.svg" alt=""></button>
     <input
       bind:value={newMessage}
       class="textarea"
       name="prompt"
       placeholder=""
-      rows="1"
+      rows="1" 
       on:keydown={(e)=>{e.key==='Enter' ? sendMessage() : null}}
     />
     <button on:click={sendMessage} class="right" > Send</button>
@@ -131,7 +131,7 @@
     justify-content: flex-end;
     padding-bottom: 90px;
     z-index: 0;
-    padding-left: 15px;
+    padding-left: 20px;
   }
 
   .messages {
@@ -214,5 +214,7 @@ font-weight: 500;
   .textarea{
     background-color: rgba(90, 90, 118, 0.308);
     border-radius: 0;
+    outline: none;
+    
   }
 </style>
