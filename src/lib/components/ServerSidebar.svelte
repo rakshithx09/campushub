@@ -9,7 +9,7 @@
   $: servers = getServers(user.id);
 </script>
 
-<section class="p-10">
+<section class="p-10 bg-[#021a42]">
   {#await servers}
     <span>...Loading</span>
   {:then serverResponse}
@@ -37,8 +37,8 @@
 
 <style>
   section {
-    background-color: var(--bg-secondary);
-    border-right: 2px solid var(--border);
+   /*  background-color: var(--bg-secondary); */
+    /* border-right: 2px solid var(--border); */
     width: 6rem;
     height: 100%;
     padding: 1rem .5rem;
