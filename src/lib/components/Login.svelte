@@ -47,7 +47,7 @@
   .container {
     width: 50%;
     height: 100%;
-    background: linear-gradient(to top left, #51535577, #021942);
+    background: linear-gradient(to top left, #51535577, rgb(24, 30, 61));
     display: flex;
     flex-direction: column;
     justify-content: center;

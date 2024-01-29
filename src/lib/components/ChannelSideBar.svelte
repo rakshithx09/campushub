@@ -154,22 +154,30 @@
 
 <style>
   section {
+    position: relative;
     display: flex;
     flex-direction: column;
-    background-color: var(--bg-secondary);
-    border-right: 2px solid var(--border);
+    background-color: rgb(44, 50, 83);
     width: 15rem;
     text-align: center;
     color: var(--secondary);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 0px;
-    border: 2px solid rgba(255, 255, 255, 0.3); /* Add a border for the glass effect */
-    border-left: #0b0352;
-    border-top: #0b0352;
-  }
+    border: 2px solid rgba(139, 138, 139, 0.616);
+    border-left: 0;
+    border-bottom: 0;
+}
 
+section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px; /* Adjust the width of the shadow as needed */
+    height: 100%;
+    box-shadow: 8px 0 8px  rgb(31, 37, 68); /* Adjust spread and blur for smoothness */
+}
   h1 {
-    background: var(--bg-accent);
+    background:  rgb(31, 37, 68);
+    
     padding: 0.5rem;
     font-size: 1.2rem;
     display: flex;
@@ -178,6 +186,7 @@
 
   .heading {
     flex-grow: 1;
+    font-size: 25px;
   }
 
   button {
@@ -186,32 +195,50 @@
   }
 
   .selected {
-    background-color: var(--bg-active);
+    background-color: rgba(255, 208, 236, 0.247);
   }
 
-  .option-container {
-    position: relative;
+  .dropdown-content {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    background-color: rgb(129, 104, 157);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
   }
 
-  dialog {
-    margin: auto;
-    border-radius: 15px;
-    background-color: rgba(65, 65, 63, 0.24);
-    font-family: "Times New Roman", Times, serif;
-    padding: 2%;
+  .dropdown:hover .dropdown-content {
+    opacity: 1;
+    transform: translateY(0);
+    background-color: rgba(56, 53, 97, 0.651);
   }
-  dialog form {
-    background-color: rgba(65, 65, 63, 0);
-  }
+
   .bg-surface-hover-token {
-    font-family: "EB Garamond", serif;
+    font-family: 'EB Garamond', serif;
     font-weight: 700;
     font-size: medium;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  .heading {
-    font-family: "Irish Grover",  system-ui;
-    font-size: 32px;
+
+  .bg-surface-hover-token:hover {
+    background-color: var(--primary);
+    color: rgb(0, 0, 0);
   }
+
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   .three-dots {
     margin-bottom: 10px;
     margin-right: 0.2rem;
@@ -219,3 +246,4 @@
     font-weight: 700;
   }
 </style>
+

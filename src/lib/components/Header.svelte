@@ -1,9 +1,9 @@
 <script lang="ts">
   import nitteLogo from "$lib/assets/nitte.svg";
   import type { BaseUser } from "$lib/types";
+  import { logout } from "$lib/db/pocketbase";
   import { reset } from "$lib/utils";
   import Profile from "./Profile.svelte";
-  import messageIcon from "$lib/assets/message-icon.svg";
 
   export let user: BaseUser | null;
 </script>
@@ -11,24 +11,21 @@
 <header>
   <nav>
     {#if user}
-      <a href="/"
-        ><img
-          src="src\lib\assets\message-icon.svg"
-          class="msg-icon"
-          alt="msg"
-        /></a
-      >
-      <a href="/courses">Courses</a>
-      <a href="/resources">Resources</a>
+      <a href="/"><img src="src\lib\assets\message-icon.svg" class="msg-icon" alt="msg" /></a>
+      <a href="/courses" class="nav-link">Courses</a>
+      <a href="/resources" class="nav-link">Resources</a>
     {/if}
   </nav>
 
   <button on:click={reset} class="btn1">
-    <img src={nitteLogo} alt="NMAMIT NITTE" />
+    <img src={nitteLogo} alt="NMAMIT NITTE" class="logo-img" />
   </button>
-  {#if user?.username || user?.email}
-    <Profile {user} />
-  {/if}
+
+  <div class="logo-section">
+    {#if user?.username || user?.email}
+      <Profile {user} />
+    {/if}
+  </div>
 </header>
 
 <style>
@@ -43,14 +40,42 @@
     align-items: center;
     background-color: var(--bg-accent);
     z-index: 3;
+    transition: background-color 0.3s ease;
   }
 
   nav {
     display: flex;
     align-items: center;
     gap: 4rem;
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--primary);
+  }
+
+  .nav-link:hover::before {
+    width: 100%;
   }
 
   a {
@@ -58,9 +83,20 @@
     align-items: center;
     transition: color 0.3s ease;
   }
-  .msg-icon {
-    height: 40px;
+
+  a:hover {
+    color: var(--primary);
   }
+
+  .msg-icon {
+    height: 37px;
+    transition: transform 0.3s ease;
+  }
+
+  .msg-icon:hover {
+    transform: scale(1.2);
+  }
+
   .btn1 {
     margin-left: auto;
     margin-right: 40px;
@@ -86,7 +122,7 @@
       transform: scale(1);
     }
     50% {
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
     100% {
       transform: scale(1);
@@ -101,6 +137,6 @@
   }
 
   .logo-section:hover {
-    opacity: 0.8;
+    opacity: 1;
   }
 </style>
