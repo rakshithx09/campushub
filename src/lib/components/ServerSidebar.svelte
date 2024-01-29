@@ -9,7 +9,7 @@
   $: servers = getServers(user.id);
 </script>
 
-<section class="p-10 bg-[#021a42]">
+<section >
   {#await servers}
     <span>...Loading</span>
   {:then serverResponse}
@@ -44,6 +44,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+    background-color: rgb(31, 37, 68);
   }
 
   button {
