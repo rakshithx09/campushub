@@ -131,7 +131,7 @@
     text-align: center;
     color: var(--secondary);
     border-top-right-radius: 20px;
-    border-bottom-right-radius: 60px;
+    border-bottom-right-radius: 0px;
     border: 2px solid rgba(255, 255, 255, 0.3); /* Add a border for the glass effect */
     border-left: #0b0352;
     border-top: #0b0352;

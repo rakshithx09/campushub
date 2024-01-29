@@ -48,7 +48,7 @@
 
   button {
     padding: 0.2rem 0.4rem;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     position: relative;
