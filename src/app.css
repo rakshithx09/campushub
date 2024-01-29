@@ -60,11 +60,6 @@ img {
   object-position: center;
 }
 
-button {
-  background-color: transparent;
-  border: none;
-}
-
 *,
 *::after,
 *::before {
@@ -78,13 +73,6 @@ nav :where(ol, ul) {
   list-style: none;
 }
 
-/* img,
-picture {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-} */
-
 p,
 h1,
 h2,
@@ -97,12 +85,8 @@ h6 {
 
 button {
   cursor: pointer;
-  font-size: var(--fs-sm);
-  display: grid;
-  place-items: center;
+  font: inherit;
   border: none;
-  background-color: hsl(var(--bkg));
-  box-shadow: var(--shadow-md);
 }
 
 body {

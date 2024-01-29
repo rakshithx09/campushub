@@ -1,9 +1,9 @@
 <script lang="ts">
   import nitteLogo from "$lib/assets/nitte.svg";
   import type { BaseUser } from "$lib/types";
-  import { logout } from "$lib/db/pocketbase";
   import { reset } from "$lib/utils";
   import Profile from "./Profile.svelte";
+  import messageIcon from "$lib/assets/message-icon.svg";
 
   export let user: BaseUser | null;
 </script>
@@ -11,13 +11,26 @@
 <header>
   <nav>
     {#if user}
+<<<<<<< HEAD
       <a href="/"><img src="src\lib\assets\message-icon.svg" class="msg-icon" alt="msg" /></a>
       <a href="/courses" class="nav-link">Courses</a>
       <a href="/resources" class="nav-link">Resources</a>
+=======
+      <a href="/"
+        ><img
+          src="src\lib\assets\message-icon.svg"
+          class="msg-icon"
+          alt="msg"
+        /></a
+      >
+      <a href="/courses">Courses</a>
+      <a href="/resources">Resources</a>
+>>>>>>> 88117cfe65e6b01b39739cec9ecdaf24b84733b0
     {/if}
   </nav>
 
   <button on:click={reset} class="btn1">
+<<<<<<< HEAD
     <img src={nitteLogo} alt="NMAMIT NITTE" class="logo-img" />
   </button>
 
@@ -26,6 +39,13 @@
       <Profile {user} />
     {/if}
   </div>
+=======
+    <img src={nitteLogo} alt="NMAMIT NITTE" />
+  </button>
+  {#if user?.username || user?.email}
+    <Profile {user} />
+  {/if}
+>>>>>>> 88117cfe65e6b01b39739cec9ecdaf24b84733b0
 </header>
 
 <style>
@@ -40,15 +60,19 @@
     align-items: center;
     background-color: var(--bg-accent);
     z-index: 3;
+<<<<<<< HEAD
     transition: background-color 0.3s ease;
+=======
+>>>>>>> 88117cfe65e6b01b39739cec9ecdaf24b84733b0
   }
 
   nav {
     display: flex;
     align-items: center;
     gap: 4rem;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 700;
+<<<<<<< HEAD
   }
 
   .nav-link {
@@ -76,6 +100,8 @@
 
   .nav-link:hover::before {
     width: 100%;
+=======
+>>>>>>> 88117cfe65e6b01b39739cec9ecdaf24b84733b0
   }
 
   a {
@@ -83,6 +109,7 @@
     align-items: center;
     transition: color 0.3s ease;
   }
+<<<<<<< HEAD
 
   a:hover {
     color: var(--primary);
@@ -97,6 +124,11 @@
     transform: scale(1.2);
   }
 
+=======
+  .msg-icon {
+    height: 40px;
+  }
+>>>>>>> 88117cfe65e6b01b39739cec9ecdaf24b84733b0
   .btn1 {
     margin-left: auto;
     margin-right: 40px;
