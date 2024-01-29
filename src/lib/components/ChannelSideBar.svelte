@@ -1,7 +1,13 @@
 <script lang="ts">
-  import { createChannel, deleteChannel, getChannels } from "$lib/db/pocketbase";
+  import {
+    createChannel,
+    deleteChannel,
+    getChannels,
+  } from "$lib/db/pocketbase";
   import { channelSelected } from "$lib/stores";
   import type { BaseUser, Server } from "$lib/types";
+  import { ServersTypeOptions } from "$lib/types/pb";
+  import AttendenceDialog from "./AttendenceDialog.svelte";
 
   export let server: Server;
   export let user: BaseUser;
@@ -16,11 +22,12 @@
 
   let createDialog: HTMLDialogElement;
   let deleteDialog: HTMLDialogElement;
+  let attendenceDialog: HTMLDialogElement;
 
   $: channelsRequest = updateChannelSet(server.id);
 
   let channelName = "";
-  let channelIdToDelete:string|null;
+  let channelIdToDelete: string | null;
 
   async function onCreateChannel() {
     if (channelName) {
@@ -29,9 +36,6 @@
       channelName = "";
     }
   }
-
-
-  
 
   async function onDeleteChannel() {
     if (channelIdToDelete) {
@@ -47,44 +51,47 @@
     <span class="heading">{server.name}</span>
 
     {#if user.id == server.owner}
-    <div class="dropdown bg-transparent">
-      <div tabindex="0" role="button" class="flex items-center h-1"><span class="three-dots">...</span></div>
-      <ul  class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[9rem]">
-        <li><button
-            on:click={() => {
-              createDialog.showModal();
-            }}>Create Channel</button
-          ></li>
-        <li><button
-            on:click={() => {
-              deleteDialog.showModal();
-            }}>Delete Channel</button
-          ></li>
-      </ul>
-    </div>
-      <!-- <span class="option-container">
-        <span>...</span>
-        <div class="options">
-          <button
-            on:click={() => {
-              createDialog.showModal();
-            }}>create channel</button
-          >
-          <button
-            on:click={() => {
-              deleteDialog.showModal();
-            }}>delete channel</button
-          >
+      <div class="dropdown bg-transparent">
+        <div tabindex="0" role="button" class="flex items-center h-1">
+          <span class="three-dots">...</span>
         </div>
-      </span> -->
+        <ul
+          class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[9rem]"
+        >
+          <li>
+            <button
+              on:click={() => {
+                createDialog.showModal();
+              }}>Create Channel</button
+            >
+          </li>
+          <li>
+            <button
+              on:click={() => {
+                deleteDialog.showModal();
+              }}>Delete Channel</button
+            >
+          </li>
+
+          {#if server.type == ServersTypeOptions.SUBJECT}
+            <li>
+              <button
+                on:click={() => {
+                  attendenceDialog.showModal();
+                }}>attendence</button
+              >
+            </li>
+          {/if}
+        </ul>
+      </div>
     {/if}
   </h1>
   {#await channelsRequest}
     <span>...loading</span>
   {:then channels}
     {#each channels as channel (channel.id)}
-      <button 
-        class={` bg-surface-hover-token p-2 ${
+      <button
+        class={` bg-surface-hover-token p-2 text-right ${
           $channelSelected?.id == channel.id ? "selected" : ""
         }`}
         on:click={() => {
@@ -102,7 +109,7 @@
     <p>Create Channel</p>
     <form method="dialog">
       <label>
-        <span >name</span>
+        <span>name</span>
         <input type="text" name="name" required bind:value={channelName} />
       </label>
       <button>Create Channel</button>
@@ -130,6 +137,19 @@
       <button class="bg-red-700">Delete Channel</button>
     </form>
   </dialog>
+
+  <dialog bind:this={createDialog} on:submit={onCreateChannel}>
+    <p>Delete Channel</p>
+    <form method="dialog">
+      <label>
+        <span>name</span>
+        <input type="text" name="name" required bind:value={channelName} />
+      </label>
+      <button>Create Channel</button>
+    </form>
+  </dialog>
+
+  <AttendenceDialog bind:attendenceDialog {server} />
 </section>
 
 <style>
@@ -137,15 +157,14 @@
     display: flex;
     flex-direction: column;
     background-color: var(--bg-secondary);
-   /*  border-right: 2px solid var(--border); */
+    border-right: 2px solid var(--border);
     width: 15rem;
     text-align: center;
     color: var(--secondary);
   }
 
   h1 {
-    background: #2e2e2e;
-    border-radius: 11px 0 0 0 ;
+    background: var(--bg-accent);
     padding: 0.5rem;
     font-size: 1.2rem;
     display: flex;
@@ -159,9 +178,6 @@
   button {
     color: var(--secondary);
     padding: 0.5rem;
-   
-    
-
   }
 
   .selected {
@@ -172,48 +188,29 @@
     position: relative;
   }
 
-  .option-container:hover .options {
-    display: block;
-  }
-
-  .options {
-    display: none;
-    position: absolute;
-    font-size: 0.9
-    rem;
-    background-color: var(--bg-surface);
-    width: max-content;
-    padding: 0.25rem;
-    left: -50%;
-  }
-
   dialog {
     margin: auto;
     border-radius: 15px;
     background-color: rgba(65, 65, 63, 0.24);
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
     padding: 2%;
   }
-  dialog form{
+  dialog form {
     background-color: rgba(65, 65, 63, 0);
   }
   .bg-surface-hover-token {
-    font-family: 'EB Garamond', serif;
+    font-family: "EB Garamond", serif;
     font-weight: 700;
     font-size: medium;
-  
   }
   .heading {
-    font-family: 'Irish Grover', system-ui;
+    font-family: "Irish Grover",  system-ui;
     font-size: 32px;
   }
-  .three-dots{
-   margin-bottom: 10px;
-   margin-right: 0.2rem;
-  font-size: 25px;
-  font-weight: 700;
+  .three-dots {
+    margin-bottom: 10px;
+    margin-right: 0.2rem;
+    font-size: 25px;
+    font-weight: 700;
   }
-  
-  
- 
 </style>
