@@ -161,6 +161,14 @@
     width: 15rem;
     text-align: center;
     color: var(--secondary);
+<<<<<<< HEAD
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 0px;
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Add a border for the glass effect */
+    border-left: #0b0352;
+    border-top: #0b0352;
+=======
+>>>>>>> 88117cfe65e6b01b39739cec9ecdaf24b84733b0
   }
 
   h1 {
