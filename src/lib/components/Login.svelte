@@ -11,74 +11,69 @@
 
 <div class="container">
   <div class="pic2"></div>
-  
-  
-  <form on:submit|preventDefault={login} style="border-radius: 20px; background-color:rgb(0,0,0,0)">
+
+  <form
+    on:submit|preventDefault={login}
+    style="border-radius: 20px; background-color:rgb(0,0,0,0)"
+  >
     <h1>Log in To Continue</h1>
     <div class="inp">
-      <input type="text" id="username" bind:value={email} placeholder="xyz@mail.com" style="font-family: 'Courier New', Courier, monospace;">
-      
+      <input
+        type="text"
+        id="username"
+        bind:value={email}
+        placeholder="xyz@mail.com"
+        style="font-family: 'Courier New', Courier, monospace;"
+      />
     </div>
     <div></div>
-   
+
     <div class="inp">
-      <input type="password" id="password" bind:value={password} placeholder="Password"style="font-family: 'Courier New', Courier, monospace;"/>
-     
+      <input
+        type="password"
+        id="password"
+        bind:value={password}
+        placeholder="Password"
+        style="font-family: 'Courier New', Courier, monospace;"
+      />
     </div>
-   
+
     <button type="submit">Login</button>
   </form>
- 
 </div>
 <div class="pic"></div>
 
 <style>
-  
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-   
-}
-
-body {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    background-color: #24242c;
-}
-
-.container {
+  .container {
     width: 50%;
     height: 100%;
-    background: linear-gradient(to top left,  #51535577 , #021942);
+    background: linear-gradient(to top left, #51535577, #021942);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 15px;
-}
+  }
 
-.pic {
+  .pic {
     position: relative;
     width: 50%;
     height: 100%;
     overflow: hidden;
-}
+  }
 
-.pic::before {
+  .pic::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(14, 5, 68, 0.384); 
-        z-index: 1; 
-}
+    background: rgba(14, 5, 68, 0.384);
+    z-index: 1;
+  }
 
-.pic::after {
+  .pic::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -90,20 +85,9 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0; /* Ensure the background image is behind the overlay */
-}
+  }
 
-/* .pic2 {
-    width: 100%;
-    height: 15px;
-    position: absolute;
-    display: none;
-    top: 0;
-    background-image: url("https://4kwallpapers.com/images/wallpapers/dark-blue-pink-2560x2560-12661.jpg");
-    background-size: cover;
-    background-position: center;
-} */
-
-.inp {
+  .inp {
     width: 350px;
     height: 50px;
     max-height: 50px;
@@ -111,9 +95,9 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-}
+  }
 
-label {
+  label {
     position: absolute;
     left: 20px;
     color: #ffffff;
@@ -122,45 +106,46 @@ label {
     padding-left: 5px;
     cursor: text;
     padding-right: 5px;
-    transition: .2s;
-   font-family: 'Courier New', Courier, monospace;
-}
+    transition: 0.2s;
+    font-family: "Courier New", Courier, monospace;
+  }
 
-input {
+  input {
     width: 100%;
     height: 100%;
     background-color: transparent;
     border: 2px solid #d0d0d3;
     border-radius: 10px;
     outline: none;
-    transition: .4s;
+    transition: 0.4s;
     color: #fff;
     padding-left: 20px;
     padding-right: 20px;
     font-size: 15px;
-    
-}
+  }
 
-input:focus {
+  input:focus {
     border: 2px solid #1f1fff;
-    box-shadow: #080841 0px 1px 1px, #6767ff 0px 0px 0px 1px;
-}
+    box-shadow:
+      #080841 0px 1px 1px,
+      #6767ff 0px 0px 0px 1px;
+  }
 
-input:focus + label {
+  input:focus + label {
     left: 20px;
     transform: translateY(-50px);
     font-size: 12px;
     background-color: #24242c00;
-}
+  }
 
-.up {
+  .up {
     left: 20px;
     transform: translateY(-22px);
     font-size: 12px;
     background-color: #24242c;
-}
+  }
 
-button {
+  button {
     width: 350px;
     height: 50px;
     min-height: 50px;
@@ -169,47 +154,47 @@ button {
     border: 2px solid #0a0a61;
     border-radius: 50px;
     outline: none;
-    transition: .4s;
+    transition: 0.4s;
     color: #fff;
     padding-left: 20px;
     padding-right: 20px;
     font-size: 15px;
     cursor: pointer;
-    font-family: 'Courier New', Courier, monospace;
-}
+    font-family: "Courier New", Courier, monospace;
+  }
 
-button:hover {
+  button:hover {
     background-color: #1717c2;
     border: 2px solid #1717c2;
-}
+  }
 
-h1 {
-    font-family: 'Courier New', Courier, monospace;
+  h1 {
+    font-family: "Courier New", Courier, monospace;
     font-weight: bold;
     font-size: 20px;
-  
+
     color: #fff;
     margin-bottom: 20px;
-}
+  }
 
-a {
+  a {
     color: #bbbbbb;
     text-decoration: none;
     font-size: 12px;
-    font-family: 'Courier New', Courier, monospace;
-}
+    font-family: "Courier New", Courier, monospace;
+  }
 
-a:hover {
+  a:hover {
     text-decoration: underline;
-}
+  }
 
-img {
+  img {
     width: 70px;
     border-radius: 10px;
     border: 1px solid #494954;
-}
+  }
 
-@media only screen and (max-width: 750px) {
+  @media only screen and (max-width: 750px) {
     .pic {
       display: none;
     }
@@ -219,28 +204,26 @@ img {
     } */
 
     .container {
-        width: 100%;
+      width: 100%;
     }
-}
+  }
 
-@media only screen and (max-height: 450px) {
+  @media only screen and (max-height: 450px) {
     .pic {
       display: none;
     }
 
     .container {
-        width: 100%;
+      width: 100%;
     }
 
     body {
-        padding-bottom: 10px;
-        overflow: scroll;
-        height: 100%;
+      padding-bottom: 10px;
+      overflow: scroll;
+      height: 100%;
     }
-    p{
-      font-family: 'Courier New', Courier, monospace;
+    p {
+      font-family: "Courier New", Courier, monospace;
     }
-    
   }
-
 </style>

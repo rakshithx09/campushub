@@ -1,7 +1,13 @@
 <script lang="ts">
-  import { createChannel, deleteChannel, getChannels } from "$lib/db/pocketbase";
+  import {
+    createChannel,
+    deleteChannel,
+    getChannels,
+  } from "$lib/db/pocketbase";
   import { channelSelected } from "$lib/stores";
   import type { BaseUser, Server } from "$lib/types";
+  import { ServersTypeOptions } from "$lib/types/pb";
+  import AttendenceDialog from "./AttendenceDialog.svelte";
 
   export let server: Server;
   export let user: BaseUser;
@@ -16,6 +22,7 @@
 
   let createDialog: HTMLDialogElement;
   let deleteDialog: HTMLDialogElement;
+  let attendenceDialog: HTMLDialogElement;
 
   $: channelsRequest = updateChannelSet(server.id);
 
@@ -44,37 +51,49 @@
     <span class="heading">{server.name}</span>
 
     {#if user.id == server.owner}
-    <div class="dropdown bg-transparent">
-      <div tabindex="0" role="button" class="flex items-center h-1"><span class="three-dots">...</span></div>
-      <ul  class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[9rem]">
-        <li>
-          <button
-            on:click={() => {
-              createDialog.showModal();
-            }}
-            class="hover:bg-primary hover:text-white transition"
-          >Create Channel</button>
-        </li>
-        <li>
-          <button
-            on:click={() => {
-              deleteDialog.showModal();
-            }}
-            class="hover:bg-primary hover:text-white transition"
-          >Delete Channel</button>
-        </li>
-      </ul>
-    </div>
+      <div class="dropdown bg-transparent">
+        <div tabindex="0" role="button" class="flex items-center h-1">
+          <span class="three-dots">...</span>
+        </div>
+        <ul
+          class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[9rem]"
+        >
+          <li>
+            <button
+              on:click={() => {
+                createDialog.showModal();
+              }}>Create Channel</button
+            >
+          </li>
+          <li>
+            <button
+              on:click={() => {
+                deleteDialog.showModal();
+              }}>Delete Channel</button
+            >
+          </li>
+
+          {#if server.type == ServersTypeOptions.SUBJECT}
+            <li>
+              <button
+                on:click={() => {
+                  attendenceDialog.showModal();
+                }}>attendence</button
+              >
+            </li>
+          {/if}
+        </ul>
+      </div>
     {/if}
   </h1>
   {#await channelsRequest}
     <span>...loading</span>
   {:then channels}
     {#each channels as channel (channel.id)}
-      <button 
-        class={`bg-surface-hover-token p-2 ${
+      <button
+        class={` bg-surface-hover-token p-2 text-right ${
           $channelSelected?.id == channel.id ? "selected" : ""
-        } fade-in`}
+        }`}
         on:click={() => {
           channelSelected.set(channel);
         }}
@@ -93,7 +112,7 @@
         <span>name</span>
         <input type="text" name="name" required bind:value={channelName} />
       </label>
-      <button class="hover:bg-primary hover:text-white transition">Create Channel</button>
+      <button>Create Channel</button>
     </form>
   </dialog>
 
@@ -115,31 +134,37 @@
           </select>
         {/await}
       </label>
-      <button class="bg-red-700 hover:bg-red-900 hover:text-white transition">Delete Channel</button>
+      <button class="bg-red-700">Delete Channel</button>
     </form>
   </dialog>
+
+  <dialog bind:this={createDialog} on:submit={onCreateChannel}>
+    <p>Delete Channel</p>
+    <form method="dialog">
+      <label>
+        <span>name</span>
+        <input type="text" name="name" required bind:value={channelName} />
+      </label>
+      <button>Create Channel</button>
+    </form>
+  </dialog>
+
+  <AttendenceDialog bind:attendenceDialog {server} />
 </section>
 
 <style>
-  
- 
   section {
     display: flex;
     flex-direction: column;
-    background-color: #353b4e;
+    background-color: var(--bg-secondary);
+    border-right: 2px solid var(--border);
     width: 15rem;
     text-align: center;
     color: var(--secondary);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 60px;
-    border: 2px solid rgba(255, 255, 255, 0.3); /* Add a border for the glass effect */
-    border-left: #0b0352;
-    border-top: #0b0352;
   }
 
   h1 {
-    background: #2e2e2e;
-    border-top-right-radius: 20px;
+    background: var(--bg-accent);
     padding: 0.5rem;
     font-size: 1.2rem;
     display: flex;
@@ -148,7 +173,6 @@
 
   .heading {
     flex-grow: 1;
-    font-size: 25px;
   }
 
   button {
@@ -157,50 +181,32 @@
   }
 
   .selected {
-    background-color: rgba(255, 255, 255, 0.322);
+    background-color: var(--bg-active);
   }
 
-  .dropdown-content {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
+  .option-container {
+    position: relative;
   }
 
-  .dropdown:hover .dropdown-content {
-    opacity: 1;
-    transform: translateY(0);
-    background-color: rgba(32, 31, 31, 0.8);
+  dialog {
+    margin: auto;
+    border-radius: 15px;
+    background-color: rgba(65, 65, 63, 0.24);
+    font-family: "Times New Roman", Times, serif;
+    padding: 2%;
   }
-
+  dialog form {
+    background-color: rgba(65, 65, 63, 0);
+  }
   .bg-surface-hover-token {
-    font-family: 'EB Garamond', serif;
+    font-family: "EB Garamond", serif;
     font-weight: 700;
     font-size: medium;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
-
-  .bg-surface-hover-token:hover {
-    background-color: var(--primary);
-    color: rgb(0, 0, 0);
+  .heading {
+    font-family: "Irish Grover",  system-ui;
+    font-size: 32px;
   }
-
-  .fade-in {
-    opacity: 0;
-    animation: fadeIn 0.5s ease forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
   .three-dots {
     margin-bottom: 10px;
     margin-right: 0.2rem;
@@ -208,7 +214,3 @@
     font-weight: 700;
   }
 </style>
-
-
-
-

@@ -1,38 +1,34 @@
 <script lang="ts">
   import nitteLogo from "$lib/assets/nitte.svg";
   import type { BaseUser } from "$lib/types";
-  import { logout } from "$lib/db/pocketbase";
   import { reset } from "$lib/utils";
   import Profile from "./Profile.svelte";
+  import messageIcon from "$lib/assets/message-icon.svg";
 
   export let user: BaseUser | null;
 </script>
 
 <header>
-  
   <nav>
-    
     {#if user}
-    <a href="/" ><img src="src\lib\assets\message-icon.svg" class="msg-icon"alt="msg"></a>
-    <a href= "/courses">Courses</a>
-    <a href="/resources">Resources</a>
-
-  {/if}
-   
+      <a href="/"
+        ><img
+          src="src\lib\assets\message-icon.svg"
+          class="msg-icon"
+          alt="msg"
+        /></a
+      >
+      <a href="/courses">Courses</a>
+      <a href="/resources">Resources</a>
+    {/if}
   </nav>
 
   <button on:click={reset} class="btn1">
     <img src={nitteLogo} alt="NMAMIT NITTE" />
-
   </button>
-
-
-  <div class="logo-section">
-    {#if user?.username || user?.email}
-      <Profile {user}/>
-    {/if}
-
-    
+  {#if user?.username || user?.email}
+    <Profile {user} />
+  {/if}
 </header>
 
 <style>
@@ -49,32 +45,23 @@
     z-index: 3;
   }
 
-  .logo-section {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  
-  }
-
   nav {
     display: flex;
     align-items: center;
     gap: 4rem;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 700;
-
   }
 
   a {
     display: flex;
     align-items: center;
   }
-  .msg-icon{
+  .msg-icon {
     height: 40px;
   }
-  .btn1{
+  .btn1 {
     margin-left: auto;
     margin-right: 40px;
   }
-  
 </style>
