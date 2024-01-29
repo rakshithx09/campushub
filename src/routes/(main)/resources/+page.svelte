@@ -1,16 +1,27 @@
 <script lang="ts">
-    import {serverSelected } from "$lib/stores";
-    import { onMount } from "svelte";
-    onMount(()=>{
-        serverSelected.set(null);
-    })
-
+  import { serverSelected } from "$lib/stores";
+  import { onMount } from "svelte";
+  import SubjectCard from "$lib/components/SubjectCard.svelte";
+  onMount(() => {
+    serverSelected.set(null);
+  });
+  let subjects = [
+    { name: "Maths", resources: { textbook: "", textbookName: "" } },
+    "DAA",
+    "MP",
+    "DBMS",
+    "SEPM",
+    "Python",
+    "ESC",
+    "EIC",
+  ];
 </script>
 
 <main>
-     <!-- TODO: resorces page goes here -->
+  {#each subjects as subject (subject)}
+    <SubjectCard {subject} />
+  {/each}
 </main>
 
 <style>
-    /* if any custom css needed insert here */
 </style>
