@@ -137,14 +137,15 @@
     display: flex;
     flex-direction: column;
     background-color: var(--bg-secondary);
-    border-right: 2px solid var(--border);
+   /*  border-right: 2px solid var(--border); */
     width: 15rem;
     text-align: center;
     color: var(--secondary);
   }
 
   h1 {
-    background: var(--bg-accent);
+    background: #2e2e2e;
+    border-radius: 11px 0 0 0 ;
     padding: 0.5rem;
     font-size: 1.2rem;
     display: flex;
