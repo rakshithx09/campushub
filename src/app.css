@@ -73,13 +73,6 @@ nav :where(ol, ul) {
   list-style: none;
 }
 
-/* img,
-picture {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-} */
-
 p,
 h1,
 h2,

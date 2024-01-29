@@ -10,10 +10,19 @@
 
 <header>
   <nav>
-    <a href="/"><img src={messageIcon} class="msg-icon" alt="msg" /></a>
-    <a href="/">Courses</a>
-    <a href="/resources">Resources</a>
+    {#if user}
+      <a href="/"
+        ><img
+          src="src\lib\assets\message-icon.svg"
+          class="msg-icon"
+          alt="msg"
+        /></a
+      >
+      <a href="/courses">Courses</a>
+      <a href="/resources">Resources</a>
+    {/if}
   </nav>
+
   <button on:click={reset} class="btn1">
     <img src={nitteLogo} alt="NMAMIT NITTE" />
   </button>

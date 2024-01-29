@@ -1,12 +1,11 @@
 <script lang="ts">
   import { fetchAttendence, fetchStudents, getCourse } from "$lib/db/pocketbase";
-  import type { Course, Server } from "$lib/types";
+  import type {Server } from "$lib/types";
 
   export let attendenceDialog: HTMLDialogElement;
   export let server: Server;
 
   let date: string = new Date().toISOString().substring(0, 10);
-  $:{}
 </script>
 
 <dialog bind:this={attendenceDialog}>
@@ -16,7 +15,7 @@
       <input type="date" bind:value={date} />
     </label>
 
-    {#await fetchStudents(server)}
+    {#await fetchAttendence(server.id,date)}
       <span>...loading</span>
     {:then students}
       {#each students as student}

@@ -84,21 +84,6 @@
           {/if}
         </ul>
       </div>
-      <!-- <span class="option-container">
-        <span>...</span>
-        <div class="options">
-          <button
-            on:click={() => {
-              createDialog.showModal();
-            }}>create channel</button
-          >
-          <button
-            on:click={() => {
-              deleteDialog.showModal();
-            }}>delete channel</button
-          >
-        </div>
-      </span> -->
     {/if}
   </h1>
   {#await channelsRequest}
@@ -201,20 +186,6 @@
 
   .option-container {
     position: relative;
-  }
-
-  .option-container:hover .options {
-    display: block;
-  }
-
-  .options {
-    display: none;
-    position: absolute;
-    font-size: 0.9 rem;
-    background-color: var(--bg-surface);
-    width: max-content;
-    padding: 0.25rem;
-    left: -50%;
   }
 
   dialog {
