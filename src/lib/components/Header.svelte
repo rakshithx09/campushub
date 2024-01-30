@@ -13,7 +13,7 @@
     {#if user}
       <a href="/"
         ><img
-          src="src\lib\assets\message-icon.svg"
+          src={messageIcon}
           class="msg-icon"
           alt="msg"
         /></a

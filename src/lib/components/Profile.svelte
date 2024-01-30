@@ -1,12 +1,11 @@
 <script lang="ts">
   import { logout } from "$lib/db/pocketbase";
   import type { BaseUser } from "$lib/types";
-  export let user: BaseUser;
   import { getImageUrl } from "$lib/db/pocketbase";
 
+  export let user: BaseUser;
+  
   const src =getImageUrl(user, user.avatar);
-
-  console.log(getImageUrl(user, user.avatar),user,user.avatar)
 </script>
 
 <div class="drawer-overlay drawer-end">
