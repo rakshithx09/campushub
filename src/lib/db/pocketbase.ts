@@ -13,7 +13,6 @@ export async function loginAdmin(email: string, password: string) {
     await pb.admins.authWithPassword(email, password);
 }
 
-
 export function logout() {
     pb.authStore.clear();
 }

@@ -14,7 +14,6 @@
     }catch(err){
       return "invalid credentials"
     }
-    return ""
   }
 </script>
 
