@@ -205,13 +205,49 @@
 </form>
 
 <style>
-  form {
+   form {
     width: 100%;
-    max-width: 100%;
-    height: 100%;
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    justify-content: space-around;
   }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  input,
+  select {
+    padding: 0.5rem;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
 </style>
