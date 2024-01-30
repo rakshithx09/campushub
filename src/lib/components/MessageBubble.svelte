@@ -14,45 +14,20 @@
 </script>
 
 <div
-  class={`chat mt-auto chat-start ${
-    message.user.id == currentUser.id ? "yourText" : ""
+  class={`chat text-sm ${
+    message.user.id == currentUser.id ? "chat-end" : "chat-start"
   }`}
 >
-  <div class="chat-image avatar">
-    <div class="w-10 rounded-full">
-      <img
-        class="avatar"
-        alt="Tailwind CSS chat bubble component"
-        src={message.avatar}
-      />
-    </div>
-  </div>
-  <div class="chat-header">
+  <img
+    class="chat-image w-10 aspect-square rounded-full"
+    alt={message.user.name}
+    src={message.avatar}
+  />
+  <div class="chat-header text-xs">
     @{message.user.name}
-    <time class="text-xs opacity-50">{message.createdAt.slice(9,message.createdAt.length-6)}</time>
+    <time class="text-xs font-thin opacity-50"
+      >{message.createdAt.slice(9, message.createdAt.length - 6)}</time
+    >
   </div>
   <p class="chat-bubble">{message.content}</p>
 </div>
-
-<style>
-  /* .avatar {
-    object-fit: cover;
-    object-position: center;
-    max-width: 60px;
-    height: 60px;
-    aspect-ratio: 1;
-    border-radius: 100%;
-  } */
-  .chat-bubble{
-    font-family: 'Times New Roman', Times, serif;
-  }
-  .chat-header{
-   font-family: 'Inter', sans-serif;
-   font-weight: 100;
-   padding-bottom: 2px;
-   padding-top: 5px;
-
-
-  }
-  
-</style>

@@ -5,6 +5,15 @@ import PocketBase from 'pocketbase';
 const url = 'http://127.0.0.1:8090'
 export const pb = new PocketBase(url);
 
+export async function loginUser(email: string, password: string) {
+    await pb.collection(Collections.Users).authWithPassword(email, password);
+}
+
+export async function loginAdmin(email: string, password: string) {
+    await pb.admins.authWithPassword(email, password);
+}
+
+
 export function logout() {
     pb.authStore.clear();
 }
@@ -68,9 +77,6 @@ export async function deleteChannel(channelId: string) {
 
 export const serverTypes = Object.values(ServersTypeOptions);
 
-// export const getUniqueYear(){
-
-// }
 
 export async function getUniqueSems() {
     return pb.send<string[]>("/custom/unique/sem", {})
@@ -188,17 +194,17 @@ export async function fetchAttendence(serverId: string, date: string) {
     return attendenceList
 }
 
-export async function fetchStudents(server:Server) {
-    const members =  await pb.collection<MessageWithUser>(Collections.Members).getFullList({
-        filter :`server = "${server.id}" && user != "${server.owner}"`,
-        expand:"user"
+export async function fetchStudents(server: Server) {
+    const members = await pb.collection<MessageWithUser>(Collections.Members).getFullList({
+        filter: `server = "${server.id}" && user != "${server.owner}"`,
+        expand: "user"
     })
-    return members.map(member=>{
+    return members.map(member => {
         return member.expand.user
     })
 }
 
-export function getDateString(date:Date) {
+export function getDateString(date: Date) {
     return `${date.getUTCFullYear()}-${(date.getUTCMonth() + 1).toString().padStart(2, '0')}-${date.getUTCDate().toString().padStart(2, '0')} 00:00:00.000Z`;
 }
 

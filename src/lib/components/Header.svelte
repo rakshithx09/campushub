@@ -1,9 +1,9 @@
 <script lang="ts">
   import nitteLogo from "$lib/assets/nitte.svg";
   import type { BaseUser } from "$lib/types";
-  import { logout } from "$lib/db/pocketbase";
   import { reset } from "$lib/utils";
   import Profile from "./Profile.svelte";
+  import messageIcon from "$lib/assets/message-icon.svg"
 
   export let user: BaseUser | null;
 </script>
@@ -11,7 +11,13 @@
 <header>
   <nav>
     {#if user}
-      <a href="/"><img src="src\lib\assets\message-icon.svg" class="msg-icon" alt="msg" /></a>
+      <a href="/"
+        ><img
+          src={messageIcon}
+          class="msg-icon"
+          alt="msg"
+        /></a
+      >
       <a href="/courses" class="nav-link">Courses</a>
       <a href="/resources" class="nav-link">Resources</a>
     {/if}

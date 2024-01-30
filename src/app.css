@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,7 +99,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--secondary);
   font-size: 1rem;
-  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-synthesis: none;
@@ -138,6 +140,7 @@ input {
   height: 2.5rem;
   width: 100%;
   padding: 0.2rem;
+  font:inherit;
 }
 
 form button {

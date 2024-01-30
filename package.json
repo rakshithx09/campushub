@@ -28,6 +28,7 @@
   "type": "module",
   "dependencies": {
     "pocketbase": "^0.20.3",
-    "pocketbase-typegen": "^1.2.1"
+    "pocketbase-typegen": "^1.2.1",
+    "svelte-toasts": "^1.1.2"
   }
 }
