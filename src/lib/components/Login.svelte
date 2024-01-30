@@ -1,7 +1,7 @@
 <script lang="ts">
   import { showToast } from "$lib/utils";
 
-  export let onLogin: (email: string, password: string) => Promise<string>;
+  export let onLogin: (email: string, password: string) => Promise<string|undefined>;
 
   let email: string;
   let password: string;
@@ -9,7 +9,9 @@
 
   async function login() {
     const errMessage = await onLogin(email, password);
-    showToast("error", errMessage, "error");
+    if(errMessage){
+      showToast("error", errMessage, "error");
+    }
     form.reset();
   }
 </script>

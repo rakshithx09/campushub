@@ -3,17 +3,13 @@
   import Login from "$lib/components/Login.svelte";
   import { loginAdmin } from "$lib/db/pocketbase";
 
-  let email: string;
-  let password: string;
-
-  async function login() {
+  async function login(email:string, password:string) {
     try {
       await loginAdmin(email, password);
       goto("/admin");
     } catch (err) {
       return "invalid credentials";
     }
-    return "";
   }
 </script>
 
