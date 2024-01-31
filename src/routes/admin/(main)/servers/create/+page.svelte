@@ -205,24 +205,35 @@
 </form>
 
 <style>
-   form {
+  form {
     width: 100%;
-    max-width: 400px; /* Adjust the maximum width as needed */
-    margin: 0 auto; /* Center the form horizontally */
-    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
     box-sizing: border-box;
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    background: linear-gradient(45deg, #2c3e50, #1f2c38);
+    border-radius: 15px;
+    display: grid;
+    gap: 1.5rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.5s ease;
+    margin-top: 50px;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   label {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
+    color: #fff;
   }
 
   span {
@@ -231,23 +242,61 @@
 
   input,
   select {
-    padding: 0.5rem;
-    border: 1px solid #aaa;
-    border-radius: 4px;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 1rem;
+    color: #fff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  }
+
+  input:hover,
+  select:hover,
+  input:focus,
+  select:focus {
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  }
+
+  input[type="file"] {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  input[type="file"]:hover,
+  input[type="file"]:focus {
+    background-color: rgba(255, 255, 255, 0.4);
   }
 
   button {
-    padding: 0.75rem;
-    background-color: #007bff;
+    padding: 1rem;
+    background-color: #3498db;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
+    transition: background-color 0.3s ease;
   }
 
   button:hover {
-    background-color: #0056b3;
+    background-color: #2980b9;
   }
+
+  p {
+    color: #e74c3c; /* Red color for error message */
+    margin-top: 1rem;
+  }
+
+  /* Responsive Grid */
+  @media screen and (min-width: 768px) {
+    form {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
 
 </style>

@@ -119,7 +119,7 @@
   </dialog>
 
   <dialog bind:this={deleteDialog} on:submit={onDeleteChannel}>
-    <p>Create Channel</p>
+    <p>Delete Channel</p>
     <form method="dialog">
       <!-- svelte-ignore a11y-label-has-associated-control -->
       <label>
@@ -129,7 +129,8 @@
         {:then channels}
           <select bind:value={channelIdToDelete}>
             {#each channels as channel (channel.id)}
-              <option value={channel.id}>
+              <option value={channel.id} style="background-color: grey
+              ;">
                 #{channel.name}
               </option>
             {/each}
@@ -157,35 +158,42 @@
 </section>
 
 <style>
-  section {
+   section {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: rgb(44, 50, 83);
+    background: linear-gradient(to bottom right, rgba(31, 37, 68), #1a1a1a);
+
     width: 15rem;
     text-align: center;
     color: var(--secondary);
-    border: 2px solid rgba(139, 138, 139, 0.616);
+    border: 2px solid rgb(139, 138, 139);
     border-left: 0;
     border-bottom: 0;
+    overflow: hidden;
+    border-radius: 7px; 
   }
+  
 
   section::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 1px; /* Adjust the width of the shadow as needed */
+    width: 1px;
     height: 100%;
-    box-shadow: 8px 0 8px rgb(31, 37, 68); /* Adjust spread and blur for smoothness */
+    box-shadow: 8px 0 8px  rgb(31, 37, 68);
   }
+
   h1 {
-    background: rgb(31, 37, 68);
+    background: linear-gradient(to bottom right, rgb(31, 37, 68), #1a1a1a);
 
     padding: 0.5rem;
     font-size: 1.2rem;
     display: flex;
     align-items: center;
+    border-bottom: 2px solid rgba(139, 138, 139, 0.616); /* Add a border-bottom for a separation line */
+    border-radius: 15px 15px 0 0; /* Add a border-radius to the top corners */
   }
 
   .heading {
@@ -196,29 +204,36 @@
   button {
     color: var(--secondary);
     padding: 0.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease, background 0.3s ease;
+  }
+
+  button:hover {
+    color: #ffffff91;
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .selected {
     background-color: rgba(255, 208, 236, 0.247);
   }
-
   .dropdown-content {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition:
-      opacity 0.3s ease,
-      transform 0.3s ease,
-      background-color 0.3s ease;
-    background-color: rgb(129, 104, 157);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-  }
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  background-color: rgb(129, 104, 157);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  z-index: 1;
+}
 
-  .dropdown:hover .dropdown-content {
-    opacity: 1;
-    transform: translateY(0);
-    background-color: rgba(56, 53, 97, 0.651);
-  }
+.dropdown:hover .dropdown-content {
+  opacity: 1;
+  transform: translateY(0);
+  background-color: rgba(56, 53, 97, 0.9); /* Adjusted transparency */
+  z-index: 1;
+}
 
   .bg-surface-hover-token {
     font-family: "EB Garamond", serif;
@@ -253,5 +268,66 @@
     margin-right: 0.2rem;
     font-size: 25px;
     font-weight: 700;
+  }
+  /* Add styles for the dialogs */
+  dialog {
+    background: linear-gradient(to bottom, #2c3e50, #34495e);
+    border-radius: 15px;
+    padding: 1rem;
+  }
+
+  dialog p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #ffffff23;
+  }
+
+  dialog form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  dialog label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  dialog input {
+    padding: 0.75rem;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: transparent;
+    color: #ffffff00;
+  }
+
+  dialog select {
+    /* Customize select styles */
+    padding: 0.75rem;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: transparent;
+    color: #ffffff62;
+    cursor: pointer;
+  }
+
+  dialog button {
+    /* Customize button styles */
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: #ffffff4b;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  dialog button:hover {
+    
+    background-color: #0056b3;
   }
 </style>
