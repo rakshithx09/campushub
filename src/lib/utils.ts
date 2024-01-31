@@ -14,7 +14,6 @@ export function pretiffyDateTime(datetimeStr: string) {
 export function reset() {
     serverSelected.set(null)
     channelSelected.set(null)
-    goto("/")
 }
 
 export function showToast(title: string, description: string, type: ToastType) {
