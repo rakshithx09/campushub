@@ -5,11 +5,11 @@
     getChannels,
   } from "$lib/db/pocketbase";
   import { channelSelected } from "$lib/stores";
-  import type { BaseUser, Server } from "$lib/types";
+  import type { BaseUser, ServerModel } from "$lib/types";
   import { ServersTypeOptions } from "$lib/types/pb";
   import AttendenceDialog from "./AttendenceDialog.svelte";
 
-  export let server: Server;
+  export let server: ServerModel;
   export let user: BaseUser;
 
   async function updateChannelSet(serverId: string) {
