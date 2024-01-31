@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getAllServers, getImageUrl } from "$lib/db/pocketbase";
+  import { getAllServers, getFileUrl } from "$lib/db/pocketbase";
   import { deleteServer } from "$lib/db/pocketbase";
     import type { Server } from "$lib/types";
 
@@ -30,7 +30,7 @@
       {#each servers as server (server.id)}
         <div class="card">
           <img
-            src={getImageUrl(server, server.image)}
+            src={getFileUrl(server, server.image)}
             alt={server.name}
             class="w-full aspect-video"
           />
