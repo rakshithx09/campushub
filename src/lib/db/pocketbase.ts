@@ -181,8 +181,6 @@ export async function createGeneralServer(servername: string, ownerId: string, i
 
 export async function deleteServer(serverId: string) {
     await pb.collection(Collections.Servers).delete(serverId);
-    const course = await pb.collection<Course>(Collections.Courses).getFirstListItem(`server = "${serverId}"`);
-    await pb.collection(Collections.Servers).delete(course.id);
 }
 
 

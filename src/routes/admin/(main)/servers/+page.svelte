@@ -1,13 +1,14 @@
 <script lang="ts">
   import { getAllServers, getFileUrl } from "$lib/db/pocketbase";
   import { deleteServer } from "$lib/db/pocketbase";
-    import type { Server } from "$lib/types";
+  import type { Server } from "$lib/types";
 
   let serverToDelete: Server;
   let deleteDialog: HTMLDialogElement;
   let servers = getAllServers()
 
    async function onDeleteServer() {
+    console.log("called")
     if (serverToDelete) {
       await deleteServer(serverToDelete.id);
       servers = getAllServers()

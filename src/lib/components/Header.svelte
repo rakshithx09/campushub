@@ -4,13 +4,14 @@
   import { reset } from "$lib/utils";
   import Profile from "./Profile.svelte";
   import messageIcon from "$lib/assets/message-icon.svg"
+    import { currentUser } from "$lib/stores";
 
   export let user: BaseUser | null;
 </script>
 
 <header>
   <nav>
-    {#if user}
+    {#if $currentUser}
       <a href="/"
         ><img
           src={messageIcon}
