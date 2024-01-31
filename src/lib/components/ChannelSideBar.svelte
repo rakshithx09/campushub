@@ -44,6 +44,8 @@
       channelIdToDelete = "";
     }
   }
+
+  $: console.log(server)
 </script>
 
 <section>
@@ -149,7 +151,9 @@
     </form>
   </dialog>
 
-  <AttendenceDialog bind:attendenceDialog {server} />
+  {#if server.type == ServersTypeOptions.SUBJECT}
+    <AttendenceDialog bind:attendenceDialog {server} />
+  {/if}
 </section>
 
 <style>
@@ -164,20 +168,20 @@
     border: 2px solid rgba(139, 138, 139, 0.616);
     border-left: 0;
     border-bottom: 0;
-}
+  }
 
-section::before {
+  section::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 1px; /* Adjust the width of the shadow as needed */
     height: 100%;
-    box-shadow: 8px 0 8px  rgb(31, 37, 68); /* Adjust spread and blur for smoothness */
-}
+    box-shadow: 8px 0 8px rgb(31, 37, 68); /* Adjust spread and blur for smoothness */
+  }
   h1 {
-    background:  rgb(31, 37, 68);
-    
+    background: rgb(31, 37, 68);
+
     padding: 0.5rem;
     font-size: 1.2rem;
     display: flex;
@@ -201,7 +205,10 @@ section::before {
   .dropdown-content {
     opacity: 0;
     transform: translateY(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      background-color 0.3s ease;
     background-color: rgb(129, 104, 157);
     backdrop-filter: blur(10px);
     border-radius: 10px;
@@ -214,10 +221,12 @@ section::before {
   }
 
   .bg-surface-hover-token {
-    font-family: 'EB Garamond', serif;
+    font-family: "EB Garamond", serif;
     font-weight: 700;
     font-size: medium;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 
   .bg-surface-hover-token:hover {
@@ -246,4 +255,3 @@ section::before {
     font-weight: 700;
   }
 </style>
-
