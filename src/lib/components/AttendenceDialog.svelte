@@ -7,21 +7,10 @@
 
   let date: string = new Date().toISOString().substring(0, 10);
 
-  // interface Attendence{
-
-  // }
-
   $: attendenceList = fetchAttendence(server.id, date);
 
   async function onCreateNew() {
-    const students = await fetchStudents(server);
-    attendenceList = students.map((student) => {
-      return {
-        name: student.name,
-        usn: student.usn,
-        present: false,
-      };
-    });
+    attendenceList = fetchStudents(server.id);
   }
 </script>
 

@@ -188,6 +188,28 @@ export async function getCourse(serverId: string) {
     const course = await pb.collection<CourseModel>(Collections.Courses).getFirstListItem(`server = "${serverId}"`)
 }
 
+// export async function fetchStudents(server: ServerModel) {
+//     const members = await pb.collection<MessageWithUser>(Collections.Members).getFullList({
+//         filter: `server = "${server.id}" && user != "${server.owner}"`,
+//         expand: "user"
+//     })
+//     return members.map(member => {
+//         return member.expand.user
+//     })
+// }
+
+type AttendenceStudent = {
+    attendenceId?: string,
+    studentId:string,
+    name: string,
+    usn:string,
+    present?:boolean
+}
+
+export async function fetchStudents(serverId:string) {
+    return await pb.send<AttendenceStudent[]>("/custom/serverstudents", {"serverId":serverId})
+}
+
 export async function fetchAttendence(serverId: string, date: string) {
     const course = await pb.collection<CourseModel>(Collections.Courses).getFirstListItem(`server = "${serverId}"`)
     const attendenceList = await pb.collection<AttendenceWithStudent>(Collections.Attendence).getFullList({
@@ -196,23 +218,13 @@ export async function fetchAttendence(serverId: string, date: string) {
     })
     return attendenceList.map(attendence=>{
         return {
-            id:attendence.id,
-            student:attendence.student,
+            attendenceId:attendence.id,
+            studentId:attendence.student,
             name:attendence.expand.student.name,
             usn:attendence.expand.student.usn,
             present:attendence.present
-        }
-    })
-}
-
-export async function fetchStudents(server: ServerModel) {
-    const members = await pb.collection<MessageWithUser>(Collections.Members).getFullList({
-        filter: `server = "${server.id}" && user != "${server.owner}"`,
-        expand: "user"
-    })
-    return members.map(member => {
-        return member.expand.user
-    })
+        } 
+    }) as AttendenceStudent[];
 }
 
 export function getDateString(date: Date) {
