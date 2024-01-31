@@ -170,7 +170,7 @@
     width: 15rem;
     text-align: center;
     color: var(--secondary);
-    border: 2px solid rgb(139, 138, 139);
+    border-top: 2px solid rgba(139, 138, 139, 0.5);
     border-left: 0;
     border-bottom: 0;
     border-radius: 7px;

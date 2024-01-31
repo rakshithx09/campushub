@@ -117,6 +117,7 @@
     justify-content: flex-end;
     padding: 1rem;
     padding-bottom: 90px;
+   background: linear-gradient(to top left, #51535577, rgb(24, 30, 61));
   }
 
   .message-box {
