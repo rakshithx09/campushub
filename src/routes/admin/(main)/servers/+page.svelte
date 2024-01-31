@@ -1,9 +1,9 @@
 <script lang="ts">
   import { getAllServers, getFileUrl } from "$lib/db/pocketbase";
   import { deleteServer } from "$lib/db/pocketbase";
-  import type { Server } from "$lib/types";
+  import type { ServerModel } from "$lib/types";
 
-  let serverToDelete: Server;
+  let serverToDelete: ServerModel;
   let deleteDialog: HTMLDialogElement;
   let servers = getAllServers()
 

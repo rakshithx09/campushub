@@ -1,4 +1,4 @@
-import type { Attendence, BaseUser, Channel, Course, MemberWithServer, MessageWithUser, Resource, Server, Student } from '$lib/types';
+import type { AttendenceModel, AttendenceWithStudent, UserModel, ChannelModel, CourseModel, MemberWithServer, MessageWithUser, ResourceModel, ServerModel, StudentModel } from '$lib/types';
 import { Collections, ServersTypeOptions, type MembersRecord, type CoursesRecord, type AttendenceRecord } from '$lib/types/pb';
 import PocketBase from 'pocketbase';
 
@@ -18,7 +18,7 @@ export function logout() {
 }
 
 export async function getAllServers() {
-    return await pb.collection<Server>("servers").getFullList();
+    return await pb.collection<ServerModel>("servers").getFullList();
 }
 
 export function getFileUrl(record: {
@@ -32,7 +32,7 @@ export function getFileUrl(record: {
 }
 
 export async function getChannels(serverId: string) {
-    return await pb.collection<Channel>("channels").getFullList({
+    return await pb.collection<ChannelModel>("channels").getFullList({
         filter: `server = "${serverId}"`,
     });
 }
@@ -56,14 +56,14 @@ export async function getServers(userId: string) {
 }
 
 export async function getAllViewableServers(userId: string) {
-    return await pb.collection<Server>("servers").getFullList({
+    return await pb.collection<ServerModel>("servers").getFullList({
         filter: `public=true or id  in (select server_id from members where user = "${userId}")`
     }
     );
 }
 
 
-export async function createChannel(name: string, server: Server) {
+export async function createChannel(name: string, server: ServerModel) {
     await pb.collection('channels').create({
         name: name,
         server: server.id
@@ -105,23 +105,23 @@ export async function getAllLecturers() {
 }
 
 export async function getAllUsers() {
-    return await pb.collection<BaseUser>(Collections.Users).getFullList()
+    return await pb.collection<UserModel>(Collections.Users).getFullList()
 }
 
 export async function createSubjectServer(servername: string, ownerId: string, branch: string, sem: string, section: string, image: any) {
-    const server = await pb.collection<Server>('servers').create({
+    const server = await pb.collection<ServerModel>('servers').create({
         name: servername,
         type: ServersTypeOptions.SUBJECT,
         owner: ownerId,
         image: image
     });
 
-    await pb.collection<Channel>(Collections.Channels).create({
+    await pb.collection<ChannelModel>(Collections.Channels).create({
         name: "general",
         server:server.id
     });
 
-    const students = await pb.collection<Student>(Collections.Students).getFullList({
+    const students = await pb.collection<StudentModel>(Collections.Students).getFullList({
         filter: `branch = "${branch}" && sem = "${sem}" && section = "${section}"`
     })
 
@@ -151,7 +151,7 @@ export async function createSubjectServer(servername: string, ownerId: string, b
 }
 
 export async function createClubServer(servername: string, ownerId: string, image: any) {
-    const server = await pb.collection<Server>('servers').create({
+    const server = await pb.collection<ServerModel>('servers').create({
         name: servername,
         type: ServersTypeOptions.SUBJECT,
         owner: ownerId,
@@ -166,7 +166,7 @@ export async function createClubServer(servername: string, ownerId: string, imag
 
 
 export async function createGeneralServer(servername: string, ownerId: string, image: any) {
-    const server = await pb.collection<Server>('servers').create({
+    const server = await pb.collection<ServerModel>('servers').create({
         name: servername,
         type: ServersTypeOptions.SUBJECT,
         owner: ownerId,
@@ -185,25 +185,46 @@ export async function deleteServer(serverId: string) {
 
 
 export async function getCourse(serverId: string) {
-    const course = await pb.collection<Course>(Collections.Courses).getFirstListItem(`server = "${serverId}"`)
+    const course = await pb.collection<CourseModel>(Collections.Courses).getFirstListItem(`server = "${serverId}"`)
+}
+
+// export async function fetchStudents(server: ServerModel) {
+//     const members = await pb.collection<MessageWithUser>(Collections.Members).getFullList({
+//         filter: `server = "${server.id}" && user != "${server.owner}"`,
+//         expand: "user"
+//     })
+//     return members.map(member => {
+//         return member.expand.user
+//     })
+// }
+
+type AttendenceStudent = {
+    attendenceId?: string,
+    studentId:string,
+    name: string,
+    usn:string,
+    present?:boolean
+}
+
+export async function fetchStudents(serverId:string) {
+    return await pb.send<AttendenceStudent[]>("/custom/serverstudents", {"serverId":serverId})
 }
 
 export async function fetchAttendence(serverId: string, date: string) {
-    const course = await pb.collection<Course>(Collections.Courses).getFirstListItem(`server = "${serverId}"`)
-    const attendenceList = await pb.collection<Attendence>(Collections.Attendence).getFullList({
-        filter: `course = "${course.id}" && date = "${date} 00:00:00.000Z"`
+    const course = await pb.collection<CourseModel>(Collections.Courses).getFirstListItem(`server = "${serverId}"`)
+    const attendenceList = await pb.collection<AttendenceWithStudent>(Collections.Attendence).getFullList({
+        filter: `course = "${course.id}" && date = "${date} 00:00:00.000Z"`,
+        expand:"student"
     })
-    return attendenceList
-}
-
-export async function fetchStudents(server: Server) {
-    const members = await pb.collection<MessageWithUser>(Collections.Members).getFullList({
-        filter: `server = "${server.id}" && user != "${server.owner}"`,
-        expand: "user"
-    })
-    return members.map(member => {
-        return member.expand.user
-    })
+    return attendenceList.map(attendence=>{
+        return {
+            attendenceId:attendence.id,
+            studentId:attendence.student,
+            name:attendence.expand.student.name,
+            usn:attendence.expand.student.usn,
+            present:attendence.present
+        } 
+    }) as AttendenceStudent[];
 }
 
 export function getDateString(date: Date) {
@@ -211,11 +232,11 @@ export function getDateString(date: Date) {
 }
 
 export async function getEnrolledCourses(studentUserId:string) {
-    return await pb.send<Course[]>("/custom/unique/enrolledcourses", {"studentUserId":studentUserId})
+    return await pb.send<CourseModel[]>("/custom/unique/enrolledcourses", {"studentUserId":studentUserId})
 }
 
 export async function getCourseResources(courseId:string) {
-    return await pb.collection<Resource>(Collections.Resources).getFullList({
+    return await pb.collection<ResourceModel>(Collections.Resources).getFullList({
         filter:`course = "${courseId}"`
     })
 }
@@ -231,7 +252,7 @@ interface Students{
 
 async function createStudent(student:Students) {
     console.log(student.name)
-    const user = await pb.collection<BaseUser>(Collections.Users).create({
+    const user = await pb.collection<UserModel>(Collections.Users).create({
         email:`${student.usn}@nmamit.in`,
         password: `${student.usn}@nmamit.in`,
         passwordConfirm:`${student.usn}@nmamit.in`,

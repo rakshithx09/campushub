@@ -1,33 +1,49 @@
-import type { AuthSystemFields, UsersRecord,StudentsRecord,LecturersRecord,ServersRecord,BaseSystemFields,ChannelsRecord,MessagesRecord, MembersRecord, CoursesRecord, ResourcesRecord} from "$lib/types/pb"
+import type { AuthSystemFields, UsersRecord,StudentsRecord,LecturersRecord,ServersRecord,BaseSystemFields,ChannelsRecord,MessagesRecord, MembersRecord, CoursesRecord, ResourcesRecord, AttendenceRecord} from "$lib/types/pb"
 
 
 // npx pocketbase-typegen --db ./pocketbase/pb_data/data.db --out pocketbase-types.ts
 
-export type BaseUser = AuthSystemFields & UsersRecord
+export type UserModel = AuthSystemFields & UsersRecord
 
-export type Student = StudentsRecord & BaseUser
+export type StudentModel = StudentsRecord & UserModel
 
-export type Lecturer = LecturersRecord & BaseUser
+export type LecturerModel = LecturersRecord & UserModel
 
-export type User = Student | Lecturer
+export type ServerModel = ServersRecord & BaseSystemFields
 
+export type ChannelModel = ChannelsRecord & BaseSystemFields
 
-export type Server = ServersRecord & BaseSystemFields
+export type CourseModel = CoursesRecord & BaseSystemFields
 
-export type Channel = ChannelsRecord & BaseSystemFields
+export type ResourceModel = ResourcesRecord & BaseSystemFields
 
-export type Course = CoursesRecord & BaseSystemFields
+export type AttendenceModel =  AttendenceRecord & BaseSystemFields
 
-export type Resource = ResourcesRecord & BaseSystemFields
-
-export type Attendence =  CoursesRecord & BaseSystemFields
-
-export type Message = MessagesRecord & BaseSystemFields
+export type MessageModel = MessagesRecord & BaseSystemFields
 
 type _expandUser = {
-    user: BaseUser;
+    user: UserModel;
 };
 
 export type MessageWithUser = MessagesRecord & Required<BaseSystemFields<_expandUser>>
 
-export type MemberWithServer = MembersRecord & Required<BaseSystemFields<{server:Server}>>
+export type MemberWithServer = MembersRecord & Required<BaseSystemFields<{server:ServerModel}>>
+
+export type AttendenceWithStudent = AttendenceRecord & Required<BaseSystemFields<{student:StudentModel}>>
+
+export type StudentAttendence = {
+    id?: string;
+    student: string;
+    name: string;
+    usn: string;
+    present: boolean | undefined;
+}
+
+
+// export type Student = {
+//     id?: string;
+//     student: string;
+//     name: string;
+//     usn: string;
+//     present: boolean | undefined;
+// }

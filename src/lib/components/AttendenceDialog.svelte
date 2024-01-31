@@ -1,23 +1,18 @@
 <script lang="ts">
-  import {
-    fetchAttendence,
-    fetchStudents,
-  } from "$lib/db/pocketbase";
-  import type { Server } from "$lib/types";
+  import { fetchAttendence, fetchStudents } from "$lib/db/pocketbase";
+  import type { ServerModel } from "$lib/types";
 
   export let attendenceDialog: HTMLDialogElement;
-  export let server: Server;
+  export let server: ServerModel;
 
   let date: string = new Date().toISOString().substring(0, 10);
 
-  async function fetchList() {
-    const result = await fetchAttendence(server.id, date);
-    if (result.length == 0) return await fetchStudents(server);
-    return result;
+  $: attendenceList = fetchAttendence(server.id, date);
+
+  async function onCreateNew() {
+    attendenceList = fetchStudents(server.id);
   }
 </script>
-
-
 
 <dialog bind:this={attendenceDialog}>
   <p>Create Channel</p>
@@ -26,36 +21,40 @@
       <input type="date" bind:value={date} />
     </label>
 
-    <table>
-      <tr>
-        <th>student</th>
-        <th>Present</th>
-        <th>Note</th>
-      </tr>
-    
-      <tbody>
-        {#await fetchList()}
-          <span>...loading</span>
-        {:then students}
-          {#each students as student}
-          {console.log(student)}
-            <tr>
-              <td>{student.name}</td>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <th>
-                <input type="text" />
-              </th>
-            </tr>
-          {/each}
-        {:catch err}
-          <span>{err}</span>
-        {/await}
-      </tbody>
-    </table>
+    {#await attendenceList}
+      <span>...loading</span>
+    {:then students}
+      {#if students.length == 0}
+        <div>
+          <span>No records found</span>
+          <button on:click={onCreateNew} type="button">Create New</button>
+        </div>
+      {:else}
+        <table>
+          <tr>
+            <th>student</th>
+            <th>Present</th>
+            <th>Note</th>
+          </tr>
+
+          <tbody>
+            {#each students as student}
+              <tr>
+                <td>{student.name}</td>
+                <td>
+                  <input type="checkbox" />
+                </td>
+                <th>
+                  <input type="text" />
+                </th>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      {/if}
+    {:catch err}
+      <span>{err}</span>
+    {/await}
     <button class="bg-red-700">Delete Channel</button>
   </form>
 </dialog>
-
-
