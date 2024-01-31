@@ -116,6 +116,11 @@ export async function createSubjectServer(servername: string, ownerId: string, b
         image: image
     });
 
+    await pb.collection<Channel>(Collections.Channels).create({
+        name: "general",
+        server:server.id
+    });
+
     const students = await pb.collection<Student>(Collections.Students).getFullList({
         filter: `branch = "${branch}" && sem = "${sem}" && section = "${section}"`
     })

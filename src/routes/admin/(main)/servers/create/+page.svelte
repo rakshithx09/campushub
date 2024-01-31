@@ -218,6 +218,7 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
     animation: fadeIn 0.5s ease;
     margin-top: 50px;
+    align-items: end;
   }
 
   @keyframes fadeIn {
@@ -285,17 +286,16 @@
     background-color: #2980b9;
   }
 
-  p {
-    color: #e74c3c; /* Red color for error message */
-    margin-top: 1rem;
-  }
-
   /* Responsive Grid */
   @media screen and (min-width: 768px) {
     form {
       grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
     }
+  }
+
+  option{
+    color: black;
   }
 
 
