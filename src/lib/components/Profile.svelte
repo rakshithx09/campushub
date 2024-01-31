@@ -50,7 +50,7 @@
 
   h1{
     margin: auto;
-    font-size: 30px;
+    font-size: 18px;
   }
 
   ul img {
