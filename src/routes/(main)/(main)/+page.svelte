@@ -1,5 +1,6 @@
 <script lang="ts">
   import Messages from "$lib/components/Messages.svelte";
+  import Landing from "$lib/components/Landing.svelte";
   import { channelSelected, serverSelected } from "$lib/stores";
 </script>
 
@@ -11,4 +12,5 @@
   {/if}
 {:else}
   <!-- TODO: home page goes here -->
+  <Landing />
 {/if}
