@@ -28,7 +28,7 @@
   </button>
 
   <div class="logo-section">
-    {#if user?.username || user?.email}
+    {#if user?.username}
       <Profile {user} />
     {/if}
   </div>

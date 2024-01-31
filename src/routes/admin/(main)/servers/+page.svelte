@@ -1,14 +1,15 @@
 <script lang="ts">
   import { getAllServers, getImageUrl } from "$lib/db/pocketbase";
   import { deleteServer } from "$lib/db/pocketbase";
+    import type { Server } from "$lib/types";
 
-  let deleteServerId: string;
+  let serverToDelete: Server;
   let deleteDialog: HTMLDialogElement;
   let servers = getAllServers()
 
    async function onDeleteServer() {
-    if (deleteServerId) {
-      await deleteServer(deleteServerId);
+    if (serverToDelete) {
+      await deleteServer(serverToDelete.id);
       servers = getAllServers()
     }
   }
@@ -38,7 +39,7 @@
             class="delete"
             on:click={() => {
               deleteDialog.showModal();
-              deleteServerId = server.id;
+              serverToDelete = server;
             }}>Delete</button
           >
         </div>
@@ -51,8 +52,8 @@
   <dialog bind:this={deleteDialog} on:submit={onDeleteServer}>
     <p>delete server</p>
     <form method="dialog">
-      <p>
-        are you really want to delete {deleteServerId} once deleted cannot be undone
+      <p class="text-center">
+        are you really want to delete <b><i>{serverToDelete?.name}</i></b> once deleted cannot be undone
       </p>
       <button class="bg-red-700">delete channel</button>
     </form>

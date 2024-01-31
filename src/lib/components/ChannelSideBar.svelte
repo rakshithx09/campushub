@@ -44,6 +44,8 @@
       channelIdToDelete = "";
     }
   }
+
+  $: console.log(server);
 </script>
 
 <section>
@@ -127,8 +129,11 @@
         {:then channels}
           <select bind:value={channelIdToDelete}>
             {#each channels as channel (channel.id)}
-              <option value={channel.id} style="background-color: grey
-              ;">
+              <option
+                value={channel.id}
+                style="background-color: grey
+              ;"
+              >
                 #{channel.name}
               </option>
             {/each}
@@ -150,11 +155,13 @@
     </form>
   </dialog>
 
-  <AttendenceDialog bind:attendenceDialog {server} />
+  {#if server.type == ServersTypeOptions.SUBJECT}
+    <AttendenceDialog bind:attendenceDialog {server} />
+  {/if}
 </section>
 
 <style>
-   section {
+  section {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -166,10 +173,9 @@
     border: 2px solid rgb(139, 138, 139);
     border-left: 0;
     border-bottom: 0;
-    overflow: hidden;
-    border-radius: 7px; 
+    border-radius: 7px;
+    border-bottom-right-radius: 0;
   }
-  
 
   section::before {
     content: "";
@@ -178,7 +184,7 @@
     left: 0;
     width: 1px;
     height: 100%;
-    box-shadow: 8px 0 8px  rgb(31, 37, 68);
+    box-shadow: 8px 0 8px rgb(31, 37, 68);
   }
 
   h1 {
@@ -203,7 +209,9 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    transition: color 0.3s ease, background 0.3s ease;
+    transition:
+      color 0.3s ease,
+      background 0.3s ease;
   }
 
   button:hover {
@@ -215,27 +223,32 @@
     background-color: rgba(255, 208, 236, 0.247);
   }
   .dropdown-content {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-  background-color: rgb(129, 104, 157);
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  z-index: 1;
-}
+    opacity: 0;
+    transform: translateY(-20px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      background-color 0.3s ease;
+    background-color: rgb(129, 104, 157);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    z-index: 1;
+  }
 
-.dropdown:hover .dropdown-content {
-  opacity: 1;
-  transform: translateY(0);
-  background-color: rgba(56, 53, 97, 0.9); /* Adjusted transparency */
-  z-index: 1;
-}
+  .dropdown:hover .dropdown-content {
+    opacity: 1;
+    transform: translateY(0);
+    background-color: rgba(56, 53, 97, 0.9); /* Adjusted transparency */
+    z-index: 3;
+  }
 
   .bg-surface-hover-token {
-    font-family: 'EB Garamond', serif;
+    font-family: "EB Garamond", serif;
     font-weight: 700;
     font-size: medium;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 
   .bg-surface-hover-token:hover {
@@ -321,8 +334,6 @@
   }
 
   dialog button:hover {
-    
     background-color: #0056b3;
   }
 </style>
-
