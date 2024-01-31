@@ -1,4 +1,4 @@
-import type { Attendence, BaseUser, Channel, Course, MemberWithServer, MessageWithUser, Server, Student } from '$lib/types';
+import type { Attendence, BaseUser, Channel, Course, MemberWithServer, MessageWithUser, Resource, Server, Student } from '$lib/types';
 import { Collections, ServersTypeOptions, type MembersRecord, type CoursesRecord, type AttendenceRecord } from '$lib/types/pb';
 import PocketBase from 'pocketbase';
 
@@ -21,7 +21,7 @@ export async function getAllServers() {
     return await pb.collection<Server>("servers").getFullList();
 }
 
-export function getImageUrl(record: {
+export function getFileUrl(record: {
     [key: string]: any;
 }, filename?: string): string {
     if (!filename) return ""
@@ -181,8 +181,6 @@ export async function createGeneralServer(servername: string, ownerId: string, i
 
 export async function deleteServer(serverId: string) {
     await pb.collection(Collections.Servers).delete(serverId);
-    const course = await pb.collection<Course>(Collections.Courses).getFirstListItem(`server = "${serverId}"`);
-    await pb.collection(Collections.Servers).delete(course.id);
 }
 
 
@@ -212,3 +210,46 @@ export function getDateString(date: Date) {
     return `${date.getUTCFullYear()}-${(date.getUTCMonth() + 1).toString().padStart(2, '0')}-${date.getUTCDate().toString().padStart(2, '0')} 00:00:00.000Z`;
 }
 
+export async function getEnrolledCourses(studentUserId:string) {
+    return await pb.send<Course[]>("/custom/unique/enrolledcourses", {"studentUserId":studentUserId})
+}
+
+export async function getCourseResources(courseId:string) {
+    return await pb.collection<Resource>(Collections.Resources).getFullList({
+        filter:`course = "${courseId}"`
+    })
+}
+
+interface Students{
+    branch:string,
+    sem:string,
+    usn:string,
+    name:string
+    section:string
+}
+
+
+async function createStudent(student:Students) {
+    console.log(student.name)
+    const user = await pb.collection<BaseUser>(Collections.Users).create({
+        email:`${student.usn}@nmamit.in`,
+        password: `${student.usn}@nmamit.in`,
+        passwordConfirm:`${student.usn}@nmamit.in`,
+        name: student.name,
+        role:"STUDENT"
+    })
+
+    return await pb.collection(Collections.Students).create({
+        usn:student.usn,
+        sem:student.sem,
+        section:student.section,
+        branch:student.branch,
+        user:user.id
+    })
+}
+
+export async function createStudentViaJson(students:Students[]) {
+    for(const student of students){
+        await createStudent(student)
+    }
+}

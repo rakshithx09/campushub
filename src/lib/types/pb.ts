@@ -13,6 +13,7 @@ export enum Collections {
 	Lecturers = "lecturers",
 	Members = "members",
 	Messages = "messages",
+	Resources = "resources",
 	Servers = "servers",
 	Students = "students",
 	Users = "users",
@@ -46,7 +47,6 @@ export type AttendenceRecord = {
 	course: RecordIdString
 	date: IsoDateString
 	note?: string
-	period: number
 	present?: boolean
 	student: RecordIdString
 }
@@ -82,6 +82,12 @@ export type MessagesRecord = {
 	channel?: RecordIdString
 	content?: string
 	user?: RecordIdString
+}
+
+export type ResourcesRecord = {
+	course: RecordIdString
+	files: string[]
+	title: string
 }
 
 export enum ServersTypeOptions {
@@ -129,6 +135,7 @@ export type DepartmentsResponse<Texpand = unknown> = Required<DepartmentsRecord>
 export type LecturersResponse<Texpand = unknown> = Required<LecturersRecord> & BaseSystemFields<Texpand>
 export type MembersResponse<Texpand = unknown> = Required<MembersRecord> & BaseSystemFields<Texpand>
 export type MessagesResponse<Texpand = unknown> = Required<MessagesRecord> & BaseSystemFields<Texpand>
+export type ResourcesResponse<Texpand = unknown> = Required<ResourcesRecord> & BaseSystemFields<Texpand>
 export type ServersResponse<Texpand = unknown> = Required<ServersRecord> & BaseSystemFields<Texpand>
 export type StudentsResponse<Texpand = unknown> = Required<StudentsRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
@@ -143,6 +150,7 @@ export type CollectionRecords = {
 	lecturers: LecturersRecord
 	members: MembersRecord
 	messages: MessagesRecord
+	resources: ResourcesRecord
 	servers: ServersRecord
 	students: StudentsRecord
 	users: UsersRecord
@@ -156,6 +164,7 @@ export type CollectionResponses = {
 	lecturers: LecturersResponse
 	members: MembersResponse
 	messages: MessagesResponse
+	resources: ResourcesResponse
 	servers: ServersResponse
 	students: StudentsResponse
 	users: UsersResponse
@@ -172,6 +181,7 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'lecturers'): RecordService<LecturersResponse>
 	collection(idOrName: 'members'): RecordService<MembersResponse>
 	collection(idOrName: 'messages'): RecordService<MessagesResponse>
+	collection(idOrName: 'resources'): RecordService<ResourcesResponse>
 	collection(idOrName: 'servers'): RecordService<ServersResponse>
 	collection(idOrName: 'students'): RecordService<StudentsResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>

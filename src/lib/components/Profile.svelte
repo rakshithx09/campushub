@@ -1,11 +1,12 @@
 <script lang="ts">
   import { logout } from "$lib/db/pocketbase";
   import type { BaseUser } from "$lib/types";
-  import { getImageUrl } from "$lib/db/pocketbase";
+  import { getFileUrl } from "$lib/db/pocketbase";
+  import dummyProfileImage from "$lib/assets/dummy-profile.png"
 
   export let user: BaseUser;
   
-  const src =getImageUrl(user, user.avatar);
+  const src =getFileUrl(user, user.avatar)?getFileUrl(user, user.avatar):dummyProfileImage;
 </script>
 
 <div class="drawer-overlay drawer-end">
@@ -20,8 +21,12 @@
     <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
       <!-- Sidebar content here -->
       <li><img {src} alt="avatar" /></li>
+      {#if user?.name}
       <li><h1>{user?.name}</h1></li>
-      <li><h3>@{user?.username}</h3></li>
+      {/if}
+      {#if user?.email}
+      <li><h1>{user?.email}</h1></li>
+      {/if}
       <li class="block mx-auto my-2">
         <button
           on:click={logout}
@@ -43,13 +48,11 @@
     padding: 3rem 0;
   }
 
-  h1,
-  h3 {
+  h1{
     margin: auto;
-  }
-  h1 {
     font-size: 30px;
   }
+
   ul img {
     width: 9rem;
     height: 8rem;

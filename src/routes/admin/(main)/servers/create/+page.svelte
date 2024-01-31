@@ -13,6 +13,7 @@
     createGeneralServer,
     createSubjectServer,
   } from "$lib/db/pocketbase";
+    import { showToast } from "$lib/utils";
 
   let serverType: ServersTypeOptions = ServersTypeOptions.SUBJECT;
   let serverName: string;
@@ -22,6 +23,7 @@
   let section: string;
   let message: string;
   let files: any;
+  let form:HTMLFormElement;
 
   function createServer() {
     if (!serverName) {
@@ -39,15 +41,18 @@
       } else if ((serverType = ServersTypeOptions.GENERAL)) {
         createGeneralServer(serverName, ownerId, image);
       } else {
-        message = "unknown server type";
+        throw "unknown server type";
       }
+      showToast("sucess","server created sucessfully","success")
+      form.reset()
     } catch (err) {
       message = err as any as string;
+      showToast("error",message,"error")
     }
   }
 </script>
 
-<form action="">
+<form bind:this={form}>
   {#if message}
     {message}
   {/if}

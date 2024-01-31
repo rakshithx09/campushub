@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import { getImageUrl, getServers } from "$lib/db/pocketbase";
+  import { getFileUrl, getServers } from "$lib/db/pocketbase";
   import { serverSelected } from "$lib/stores";
   import type { BaseUser } from "$lib/types";
 
@@ -24,7 +24,7 @@
         }}
       >
         <img
-          src={getImageUrl(server, server.image)}
+          src={getFileUrl(server, server.image)}
           alt={server.name}
           class={$serverSelected?.id == server.id ? "selected" : ""}
         />

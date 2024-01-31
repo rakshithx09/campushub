@@ -11,12 +11,12 @@
     }
   });
 
-  $: admin = $adminStore!;
 </script>
 
 <main>
   <section class="sidebar">
     <a href="/admin/servers">servers</a>
+    <a href="/admin/students">students</a>
   </section>
   <div class="content">
     <slot />

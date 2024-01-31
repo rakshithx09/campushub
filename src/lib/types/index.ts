@@ -1,4 +1,4 @@
-import type { AuthSystemFields, UsersRecord,StudentsRecord,LecturersRecord,ServersRecord,BaseSystemFields,ChannelsRecord,MessagesRecord, MembersRecord, CoursesRecord} from "$lib/types/pb"
+import type { AuthSystemFields, UsersRecord,StudentsRecord,LecturersRecord,ServersRecord,BaseSystemFields,ChannelsRecord,MessagesRecord, MembersRecord, CoursesRecord, ResourcesRecord} from "$lib/types/pb"
 
 
 // npx pocketbase-typegen --db ./pocketbase/pb_data/data.db --out pocketbase-types.ts
@@ -17,6 +17,8 @@ export type Server = ServersRecord & BaseSystemFields
 export type Channel = ChannelsRecord & BaseSystemFields
 
 export type Course = CoursesRecord & BaseSystemFields
+
+export type Resource = ResourcesRecord & BaseSystemFields
 
 export type Attendence =  CoursesRecord & BaseSystemFields
 
