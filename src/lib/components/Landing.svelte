@@ -96,16 +96,23 @@
     position: relative;
     height: 100%;
     width: 100%;
-    background: linear-gradient(
-      180deg,
-      rgba(80, 93, 98, 0.62) 0%,
-      rgba(75, 90, 96, 0.61) 0.01%,
-      rgba(23, 134, 176, 0.33) 100%
-    );
-  }
+    background: linear-gradient(to top left, #51535577, rgb(24, 30, 61));
+}
 
-  a,
-  button {
+.headings {
+    /* position: absolute;
+    width: 60%;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 5%; */
+}
+
+a, button {
     width: 100%;
-  }
+    transition: background-color 0.3s ease; /* Add transition for a smooth effect */
+}
+
+a:hover, button:hover {
+    background-color: rgba(255, 255, 255, 0.171); /* Change the background color on hover */
+}
 </style>
