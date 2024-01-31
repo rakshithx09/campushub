@@ -59,18 +59,12 @@ Feb 6 : code submission and video demo ( 5 minutes of video )
 
 # To -do:
 
-
-- [ ]  resources hardcoded
 - [ ]  task conduction should see (additional implementation)
-- [ ]  courses hardcoded
-- [ ]  grades checking ( additional feature)
-- [ ]  attendence(rakshith)
-- [ ]  task conduction (hardcoded- kannada )
-- [ ]  images uploadation( karthik )
-- [ ]  ui update (rakshith)
-- [ ]  channel where core people can talk
-- [ ]  marks list.. (addditonal feature)
-- [ ]  
+-where lecturers sit tht to add
+- ui courses
+- host it
+
+
 
 
 
