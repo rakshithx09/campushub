@@ -7,10 +7,9 @@
 {#if $serverSelected}
   {#if $channelSelected}
     <Messages />
-<!--   {:else}
-    <p>😢 no channel selected</p> -->
+  {:else}
+    <p>😢 no channel selected</p>
   {/if}
 {:else}
-  <!-- TODO: home page goes here -->
   <Landing />
 {/if}

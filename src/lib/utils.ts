@@ -1,4 +1,3 @@
-import { goto } from "$app/navigation";
 import type { ToastType } from "svelte-toasts/types/common";
 import { channelSelected, serverSelected } from "./stores";
 import { toasts } from "svelte-toasts";
