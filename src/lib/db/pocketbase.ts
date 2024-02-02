@@ -1,4 +1,4 @@
-import type { AttendenceModel, AttendenceWithStudent, UserModel, ChannelModel, CourseModel, MemberWithServer, MessageWithUser, ResourceModel, ServerModel, StudentModel } from '$lib/types';
+import type { AttendenceWithStudent, UserModel, ChannelModel, CourseModel, MemberWithServer, MessageWithUser, ResourceModel, ServerModel, StudentModel } from '$lib/types';
 import { Collections, ServersTypeOptions, type MembersRecord, type CoursesRecord, type AttendenceRecord } from '$lib/types/pb';
 import PocketBase from 'pocketbase';
 

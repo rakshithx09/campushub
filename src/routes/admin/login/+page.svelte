@@ -13,4 +13,17 @@
   }
 </script>
 
-<Login onLogin={login} />
+
+
+<main>
+  <Login onLogin={login} />
+</main>
+
+<style>
+  main {
+    display: flex;
+    width: 100%;
+    /* height: 100vh; */
+    height: calc(100vh - 80px);
+  }
+</style>
