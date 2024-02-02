@@ -1,12 +1,12 @@
 <script lang="ts">
   import nitteLogo from "$lib/assets/nitte.svg";
-  import type { BaseUser } from "$lib/types";
+  import type { UserModel } from "$lib/types";
   import { reset } from "$lib/utils";
   import Profile from "./Profile.svelte";
   import messageIcon from "$lib/assets/message-icon.svg"
     import { currentUser } from "$lib/stores";
 
-  export let user: BaseUser | null;
+  export let user: UserModel | null;
 </script>
 
 <header>
@@ -21,6 +21,7 @@
       >
       <a href="/courses" class="nav-link">Courses</a>
       <a href="/resources" class="nav-link">Resources</a>
+      <a href="/nittemania">NitteMania</a>
     {/if}
   </nav>
 
