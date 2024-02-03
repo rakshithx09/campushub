@@ -1,12 +1,14 @@
 <script lang="ts">
   import { logout } from "$lib/db/pocketbase";
-  import type { BaseUser } from "$lib/types";
+  import type { UserModel } from "$lib/types";
   import { getFileUrl } from "$lib/db/pocketbase";
-  import dummyProfileImage from "$lib/assets/dummy-profile.png"
+  import dummyProfileImage from "$lib/assets/dummy-profile.png";
 
-  export let user: BaseUser;
-  
-  const src =getFileUrl(user, user.avatar)?getFileUrl(user, user.avatar):dummyProfileImage;
+  export let user: UserModel;
+
+  const src = getFileUrl(user, user.avatar)
+    ? getFileUrl(user, user.avatar)
+    : dummyProfileImage;
 </script>
 
 <div class="drawer-overlay drawer-end">
@@ -22,10 +24,10 @@
       <!-- Sidebar content here -->
       <li><img {src} alt="avatar" /></li>
       {#if user?.name}
-      <li><h1>{user?.name}</h1></li>
+        <li><h1>{user?.name}</h1></li>
       {/if}
       {#if user?.email}
-      <li><h1>{user?.email}</h1></li>
+        <li><h1>{user?.email}</h1></li>
       {/if}
       <li class="block mx-auto my-2">
         <button
@@ -48,7 +50,7 @@
     padding: 3rem 0;
   }
 
-  h1{
+  h1 {
     margin: auto;
     font-size: 18px;
   }
@@ -60,8 +62,7 @@
     margin: auto;
   }
 
-
-  .drawer-side{
+  .drawer-side {
     overflow: hidden;
   }
 </style>
