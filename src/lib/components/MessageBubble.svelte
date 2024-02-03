@@ -1,16 +1,16 @@
 <script lang="ts">
-  import type { BaseUser } from "$lib/types";
+  import type { UserModel } from "$lib/types";
 
   interface Message {
     id: string;
-    user: BaseUser;
+    user: UserModel;
     avatar: string;
     content: string;
     createdAt: string;
   }
 
   export let message: Message;
-  export let currentUser: BaseUser;
+  export let currentUser: UserModel;
 </script>
 
 <div

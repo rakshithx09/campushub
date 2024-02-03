@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getMessages, pb } from "$lib/db/pocketbase";
   import { channelSelected, currentUser } from "$lib/stores";
-  import type { BaseUser, MessageWithUser } from "$lib/types";
+  import type { UserModel, MessageWithUser } from "$lib/types";
   import { pretiffyDateTime } from "$lib/utils";
   import { onMount, onDestroy } from "svelte";
   import MessageBubble from "./MessageBubble.svelte";
@@ -38,7 +38,7 @@
           // Fetch associated user
           if (record.channel == channelId) {
             const user = await pb
-              .collection<BaseUser>("users")
+              .collection<UserModel>("users")
               .getOne(record.user!);
             record.expand = { user };
             messages = [...messages, record];
@@ -117,7 +117,7 @@
     justify-content: flex-end;
     padding: 1rem;
     padding-bottom: 90px;
-   background: linear-gradient(to top left, #51535577, rgb(24, 30, 61));
+    background: linear-gradient(to top left, #51535577, rgb(24, 30, 61));
   }
 
   .message-box {
@@ -137,6 +137,12 @@
     border-bottom-left-radius: 10px;
     padding-left: 8px;
   }
+
+  .message-box .left:hover,
+  .message-box .right:hover {
+    background-color: rgba(167, 167, 167, 0.527);
+  }
+
   .message-box .right {
     background-color: rgba(90, 90, 118, 0.308);
     border-top-right-radius: 10px;

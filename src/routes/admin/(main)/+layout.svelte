@@ -1,12 +1,10 @@
 <script lang="ts">
-  import { admin as adminStore } from "$lib/stores/admin";
+  import { admin} from "$lib/stores/admin";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
 
-  console.log($adminStore)
-
   onMount(() => {
-    if (!$adminStore) {
+    if (!$admin) {
       goto("/admin/login");
     }
   });
@@ -50,20 +48,17 @@
     width: 130px;
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    gap:1rem;
     
   }
 
   .sidebar a {
-    color: #ecf0f1;
-    text-decoration: none;
     padding: 10px 0;
-    font-size: 16px;
     transition: background-color 0.3s ease;
+    border-radius: 10px;
   }
 
   .sidebar a:hover {
     background-color: #6d7883;
-    border-radius: 10px;
-    width: 75px;
   }
 </style>

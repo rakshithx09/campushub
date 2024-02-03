@@ -2,9 +2,9 @@
   import { goto } from "$app/navigation";
   import { getFileUrl, getServers } from "$lib/db/pocketbase";
   import { serverSelected } from "$lib/stores";
-  import type { BaseUser } from "$lib/types";
+  import type { UserModel } from "$lib/types";
 
-  export let user: BaseUser;
+  export let user: UserModel;
 
   $: servers = getServers(user.id);
 </script>

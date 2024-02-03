@@ -8,7 +8,6 @@
   let servers = getAllServers();
 
   async function onDeleteServer() {
-    console.log("called");
     if (serverToDelete) {
       await deleteServer(serverToDelete.id);
       servers = getAllServers();
@@ -37,6 +36,7 @@
             class="w-full aspect-video"
           />
           <span>{server.name}</span>
+          <span>{server.type}</span>
           <button
             class="delete"
             on:click={() => {
@@ -67,9 +67,8 @@
   .servers {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    justify-content: space-evenly;
+    gap: 1rem;
+    padding: 1rem;
   }
 
   .card {
@@ -112,7 +111,7 @@
     background: #fa0019;
   }
 
-  input {
+  /* input {
     height: 50px;
     width: 100%;
     padding: 15px;
@@ -127,14 +126,14 @@
     outline: none;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     border-color: #4c8bf5;
-  }
+  } */
 
   .server-create {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     color: #ffffff;
   }
-  .search {
+  /* .search {
     margin-top: 10x;
     margin-bottom: 30px;
-  }
+  } */
 </style>

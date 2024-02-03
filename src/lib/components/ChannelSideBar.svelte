@@ -93,7 +93,7 @@
   {:then channels}
     {#each channels as channel (channel.id)}
       <button
-        class={` bg-surface-hover-token p-2 text-right ${
+        class={`p-2 text-right ${
           $channelSelected?.id == channel.id ? "selected" : ""
         }`}
         on:click={() => {
@@ -131,8 +131,7 @@
             {#each channels as channel (channel.id)}
               <option
                 value={channel.id}
-                style="background-color: grey
-              ;"
+                class="bg-slate-500 bg-surface-hover-token"
               >
                 #{channel.name}
               </option>
@@ -145,10 +144,10 @@
   </dialog>
 
   <dialog bind:this={createDialog} on:submit={onCreateChannel}>
-    <p>Delete Channel</p>
+    <p>Create Channel</p>
     <form method="dialog">
       <label>
-        <span>name</span>
+        <span>Channel name</span>
         <input type="text" name="name" required bind:value={channelName} />
       </label>
       <button>Create Channel</button>
@@ -203,7 +202,7 @@
     font-size: 25px;
   }
 
-  button {
+  .dropdown button {
     color: var(--secondary);
     padding: 0.5rem;
     background: transparent;
@@ -214,7 +213,7 @@
       background 0.3s ease;
   }
 
-  button:hover {
+  .dropdown button:hover {
     color: #ffffff91;
     background: rgba(255, 255, 255, 0.1);
   }
@@ -275,65 +274,5 @@
     margin-right: 0.2rem;
     font-size: 25px;
     font-weight: 700;
-  }
-  /* Add styles for the dialogs */
-  dialog {
-    background: linear-gradient(to bottom, #2c3e50, #34495e);
-    border-radius: 15px;
-    padding: 1rem;
-  }
-
-  dialog p {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: #ffffff23;
-  }
-
-  dialog form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  dialog label {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  dialog input {
-    padding: 0.75rem;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    font-size: 1rem;
-    background: transparent;
-    color: #ffffff00;
-  }
-
-  dialog select {
-    /* Customize select styles */
-    padding: 0.75rem;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    font-size: 1rem;
-    background: transparent;
-    color: #ffffff62;
-    cursor: pointer;
-  }
-
-  dialog button {
-    /* Customize button styles */
-    padding: 0.75rem;
-    background-color: #007bff;
-    color: #ffffff4b;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-  }
-
-  dialog button:hover {
-    background-color: #0056b3;
   }
 </style>
