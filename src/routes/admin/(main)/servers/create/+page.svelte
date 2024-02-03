@@ -13,7 +13,7 @@
     createGeneralServer,
     createSubjectServer,
   } from "$lib/db/pocketbase";
-    import { showToast } from "$lib/utils";
+  import { showToast } from "$lib/utils";
 
   let serverType: ServersTypeOptions = ServersTypeOptions.SUBJECT;
   let serverName: string;
@@ -21,41 +21,36 @@
   let branch: string;
   let sem: string;
   let section: string;
-  let message: string;
   let files: any;
-  let form:HTMLFormElement;
+  let form: HTMLFormElement;
 
   function createServer() {
     if (!serverName) {
-      message = "server name is missing";
+      showToast("error","server name is missing","error");
       return;
     }
 
     const image = files && files.length ? files[0] : null;
 
     try {
-      if ((serverType = ServersTypeOptions.SUBJECT)) {
+      if (serverType === ServersTypeOptions.SUBJECT) {
         createSubjectServer(serverName, ownerId, branch, sem, section, image);
-      } else if ((serverType = ServersTypeOptions.CLUB)) {
+      } else if (serverType === ServersTypeOptions.CLUB) {
         createClubServer(serverName, ownerId, image);
-      } else if ((serverType = ServersTypeOptions.GENERAL)) {
-        createGeneralServer(serverName, ownerId, image);
+      } else if (serverType === ServersTypeOptions.GENERAL){
+        createGeneralServer(serverName, ownerId, branch, sem, section, image);
       } else {
         throw "unknown server type";
       }
-      showToast("sucess","server created sucessfully","success")
-      form.reset()
+      showToast("sucess", "server created sucessfully", "success");
+      form.reset();
     } catch (err) {
-      message = err as any as string;
-      showToast("error",message,"error")
+      showToast("error", err as any as string, "error");
     }
   }
 </script>
 
 <form bind:this={form}>
-  {#if message}
-    {message}
-  {/if}
   <label>
     <span>Server Name</span>
     <input type="text" bind:value={serverName} />
@@ -254,7 +249,10 @@
     background-color: rgba(255, 255, 255, 0.2);
     font-size: 1rem;
     color: #fff;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      color 0.3s ease;
   }
 
   input:hover,
@@ -299,9 +297,7 @@
     }
   }
 
-  option{
+  option {
     color: black;
   }
-
-
 </style>

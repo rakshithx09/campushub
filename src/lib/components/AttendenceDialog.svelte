@@ -55,6 +55,5 @@
     {:catch err}
       <span>{err}</span>
     {/await}
-    <button class="bg-red-700">Delete Channel</button>
   </form>
 </dialog>
