@@ -3,22 +3,19 @@
   import ServerSidebar from "$lib/components/ServerSidebar.svelte";
   import ChannelSideBar from "$lib/components/ChannelSideBar.svelte";
   import Login from "$lib/components/Login.svelte";
-    import { loginUser } from "$lib/db/pocketbase";
+  import { loginUser } from "$lib/db/pocketbase";
 
   $: user = $currentUser;
   $: server = $serverSelected;
 
-  async function onLogin(email:string,password:string){
-    try{
-      await loginUser(email,password);
-    }catch(err){
-      return "invalid credentials"
+  async function onLogin(email: string, password: string) {
+    try {
+      await loginUser(email, password);
+    } catch (err) {
+      return "invalid credentials";
     }
   }
 </script>
-
-<svelte:head>
-</svelte:head>
 
 <main>
   {#if user}
@@ -30,7 +27,7 @@
       <slot />
     </div>
   {:else}
-    <Login onLogin={onLogin}/>
+    <Login {onLogin} />
   {/if}
 </main>
 
@@ -47,6 +44,5 @@
     width: 100%;
     overflow-y: scroll;
     min-height: 100%;
-    
   }
 </style>

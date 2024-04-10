@@ -1,6 +1,6 @@
 import { pb } from "$lib/db/pocketbase";
 import { writable } from "svelte/store";
-import type { BaseUser, ServerModel, ChannelModel, CourseModel } from "$lib/types";
+import type { UserModel, ServerModel, ChannelModel, CourseModel } from "$lib/types";
 import { reset } from "$lib/utils";
 
 // User 
@@ -8,10 +8,10 @@ import { reset } from "$lib/utils";
 function getUser() {
     if (pb.authStore.isAdmin)
         return null
-    return pb.authStore.model as BaseUser | null
+    return pb.authStore.model as UserModel | null
 }
 
-export const currentUser = writable<BaseUser | null>(getUser());
+export const currentUser = writable<UserModel | null>(getUser());
 
 pb.authStore.onChange((auth) => {
     currentUser.set(getUser())
